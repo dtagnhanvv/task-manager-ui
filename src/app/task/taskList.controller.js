@@ -5,7 +5,7 @@
         .controller('TaskList', TaskList);
 
     function TaskList($scope, $stateParams, $modal, Notification, $translate, tasks, MODES, ITEMS_PER_PAGE, taskManager,
-                     AtSortableService, historyStorage, HISTORY_TYPE_PATH, EVENT_ACTION_SORTABLE) {
+                     AtSortableService, historyStorage, HISTORY_TYPE_PATH, EVENT_ACTION_SORTABLE, ASC, DESC) {
 
         $scope.itemsPerPageList = ITEMS_PER_PAGE;
         $scope.tableConfig = {
@@ -29,7 +29,32 @@
         $scope.changePage = changePage;
         $scope.onItemPerPageChange = onItemPerPageChange;
         $scope.hasData = hasData;
+        $scope.sort = sort;
 
+
+        $scope.columns = ['actions', 'cardNumber', 'project', 'releasePlan', 'board',
+            'url', 'status', 'review'];
+
+        function sort(keyName) {
+            $scope.sortData = _initSortData();
+
+            $stateParams.orderBy = $stateParams.orderBy === DESC ? ASC : DESC;
+            $stateParams.sortField = keyName;
+
+            $scope.sortData[keyName] = $stateParams.orderBy;
+            var filterParam = _refactorSearchModel();
+            _getTasks(stateParams, 1, filterParam);
+        }
+
+        function _refactorSearchModel() {
+            return angular.copy($scope.searchModel);
+        }
+
+        function _initSortData() {
+            return {
+
+            };
+        }
 
         function hasData() {
             return $scope.self.tasks && $scope.self.tasks.records && $scope.self.tasks.records.length > 0;

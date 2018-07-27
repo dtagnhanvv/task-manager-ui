@@ -19,13 +19,53 @@
                 {{ tableConfig.totalItems }} {{'RECORDS_FOUND' | translate}}
             </span>
     </form>
-    <div class="panel-body" ng-if="hasData()">
+    <div class="panel-body">
         <div class="table-responsive">
-            <table class="table" at-action-sortable-query at-sortable-query at-table at-paginated at-list="self.tasks.records" at-config="tableConfig">
+            <table class="table">
                 <thead>
+                <tr>
+                    <th ng-repeat="column in columns track by $index" ng-click="sort(column)">{{columnsTitle[column]}}
+                        <span class="glyphicon glyphicon-minus" ng-if="'ACTIONS' !== column && sortData[column] !== 'desc' && sortData[column] !== 'asc'"></span>
+                        <span ng-if="'ACTIONS' !== column" class="glyphicon"
+                              ng-class="{'glyphicon-chevron-up':sortData[column] === 'asc','glyphicon-chevron-down':sortData[column] === 'desc'}"></span>
+                    </th>
+                </tr>
                 </thead>
+
                 <tbody>
                 <tr>
+                    <td></td>
+
+                    <td class="id-col">
+                        <input name="id" id="cardNumber" ng-model="searchModel.cardNumber" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                    <td class="id-col">
+                        <input name="id" id="project" ng-model="searchModel.project" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                    <td class="id-col">
+                        <input name="id" id="releasePlan" ng-model="searchModel.releasePlan" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                    <td class="id-col">
+                        <input name="id" id="board" ng-model="searchModel.board" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                    <td class="id-col">
+                        <input name="id" id="url" ng-model="searchModel.url" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                    <td class="id-col">
+                        <input name="id" id="status" ng-model="searchModel.status" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                    <td class="id-col">
+                        <input name="id" id="review" ng-model="searchModel.review" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+                </tr>
+
+                <tr ng-repeat=" item in self.tasks.records track by $index">
                     <td at-title="{{ 'ACTIONS' | translate }}">
                         <div class="btn-group" dropdown>
                             <button type="button" class="btn " dropdown-toggle> {{ 'ACTIONS' | translate }} <span class="caret"></span></button>
@@ -35,13 +75,13 @@
                             </ul>
                         </div>
                     </td>
-                    <td at-implicit at-sortable at-attribute="cardNumber" at-title="{{ 'TASK.CARD_NUMBER' | translate }}"></td>
-                    <td at-implicit at-sortable at-attribute="project" at-title="{{ 'TASK.PROJECT' | translate }}"></td>
-                    <td at-implicit at-sortable at-attribute="releasePlan" at-title="{{ 'TASK.RELEASE_PLAN' | translate }}"></td>
-                    <td at-implicit at-sortable at-attribute="board" at-title="{{ 'TASK.BOARD' | translate }}"></td>
-                    <td at-implicit at-sortable at-title="{{ 'TASK.URL' | translate }}"><a href="{{item.url}}" target="_blank">{{item.url}}</a></td>
-                    <td at-implicit at-sortable at-attribute="status" at-title="{{ 'TASK.STATUS' | translate }}"></td>
-                    <td at-implicit at-sortable at-attribute="name" at-title="{{ 'TASK.REVIEW' | translate }}"></td>
+                    <td at-sortable at-attribute="cardNumber" at-title="{{ 'TASK.CARD_NUMBER' | translate }}">{{item.cardNumber}}</td>
+                    <td at-sortable at-attribute="project" at-title="{{ 'TASK.PROJECT' | translate }}">{{item.project}}</td>
+                    <td at-sortable at-attribute="releasePlan" at-title="{{ 'TASK.RELEASE_PLAN' | translate }}">{{item.releasePlan}}</td>
+                    <td at-sortable at-attribute="board" at-title="{{ 'TASK.BOARD' | translate }}">{{item.board}}</td>
+                    <td at-sortable at-title="{{ 'TASK.URL' | translate }}"><a href="{{item.url}}" target="_blank">{{item.url}}</a></td>
+                    <td at-sortable at-attribute="status" at-title="{{ 'TASK.STATUS' | translate }}">{{item.status}}</td>
+                    <td at-sortable at-attribute="review" at-title="{{ 'TASK.REVIEW' | translate }}">{{item.review}}</td>
                 </tr>
                 </tbody>
             </table>
