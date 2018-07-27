@@ -488,7 +488,6 @@
                 "RELEASE_PLAN": "Lịch release",
                 "CARD_NUMBER": "Trello card",
                 "STATUS": "Trạng thái",
-                "TASK_URL": "URL",
                 "REVIEW": "Nhận xét",
                 "TYPE": "Loại",
                 "BOARD": "Bảng"

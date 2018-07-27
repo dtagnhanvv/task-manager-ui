@@ -10,7 +10,7 @@
         $scope.formData = {};
         $scope.model = task || {
             project: "Biddy",
-            taskUrl: null,
+            url: null,
             board: null,
             cardNumber: null,
             status: null,
@@ -52,7 +52,7 @@
         function refactorJson(model) {
             return {
                 project: model.project,
-                taskUrl: model.taskUrl,
+                url: model.url,
                 board: model.board,
                 cardNumber: model.cardNumber,
                 status: model.status,
