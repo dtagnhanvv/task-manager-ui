@@ -40,9 +40,8 @@
                     <td at-implicit at-sortable at-attribute="releasePlan" at-title="{{ 'TASK.RELEASE_PLAN' | translate }}"></td>
                     <td at-implicit at-sortable at-attribute="board" at-title="{{ 'TASK.BOARD' | translate }}"></td>
                     <td at-implicit at-sortable at-title="{{ 'TASK.URL' | translate }}"><a href="{{item.url}}" target="_blank">{{item.url}}</a></td>
+                    <td at-implicit at-sortable at-attribute="status" at-title="{{ 'TASK.STATUS' | translate }}"></td>
                     <td at-implicit at-sortable at-attribute="name" at-title="{{ 'TASK.REVIEW' | translate }}"></td>
-                    <td at-implicit at-sortable at-attribute="name" at-title="{{ 'TASK.STATUS' | translate }}"></td>
-                    <td at-sortable at-attribute="createdDate" at-title="{{ 'CREATED_DATE' | translate }}">{{ item.createdDate | date: DEFAULT_DATETIME_FORMAT}}</td>
                 </tr>
                 </tbody>
             </table>
