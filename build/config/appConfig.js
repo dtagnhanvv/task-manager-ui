@@ -11,14 +11,14 @@ module.exports = {
         origin: {
             dev: {
                 tagcade: {
-                    match: /api\.biddy\.test/g,
-                    val: 'api.biddy.test',
-                    apiEndPoint: 'http://api.biddy.test/app_dev.php/api'
+                    match: /api\.task\.test/g,
+                    val: 'api.task.test',
+                    apiEndPoint: 'http://api.task.test/app_dev.php/api'
                 },
                 unified: {
-                    match: /ur-api\.biddy\.test/g,
-                    val: 'ur-api.biddy.test',
-                    apiEndPoint: 'http://ur-api.biddy.test/app_dev.php/api'
+                    match: /ur-api\.task\.test/g,
+                    val: 'ur-api.task.test',
+                    apiEndPoint: 'http://ur-api.task.test/app_dev.php/api'
                 }
             },
             prod: {
