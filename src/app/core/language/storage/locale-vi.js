@@ -484,7 +484,13 @@
                 "BACK_TO_LIST": "Quay lại danh sách công việc",
                 "NAME": "Tên",
                 "URL": "Url",
-                "TYPE": "Loại"
+                "PROJECT": "Dự án",
+                "RELEASE_PLAN": "Lịch release",
+                "CARD_NUMBER": "Trello card",
+                "STATUS": "Trạng thái",
+                "TASK_URL": "URL",
+                "REVIEW": "Nhận xét",
+                "TYPE": "Loại",
             },
             "RATING": {
                 "LIST": "Danh sách các đánh giá",
