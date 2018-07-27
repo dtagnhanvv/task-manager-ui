@@ -9,9 +9,13 @@
         $scope.keyword = '';
         $scope.formData = {};
         $scope.model = task || {
-            name: null,
-            type: 'Product',
-            url: null
+            project: null,
+            taskUrl: null,
+            board: null,
+            cardNumber: null,
+            status: null,
+            releasePlan: null,
+            review: null
         };
         $scope.self = {
             formProcessing: false,
@@ -47,10 +51,13 @@
 
         function refactorJson(model) {
             return {
-                id: model.id,
-                name: model.name,
-                url: model.url,
-                type: model.type
+                project: model.project,
+                taskUrl: model.taskUrl,
+                board: model.board,
+                cardNumber: model.cardNumber,
+                status: model.status,
+                releasePlan: model.releasePlan,
+                review: model.url
             };
         }
 
