@@ -1,0 +1,131 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+    </div>
+    <div class="panel-body">
+        <div class="media user-summary form-group">
+            <div class="media-left">
+                <img class="bd-avatar-sm" ng-if="account.profileImageUrl" ng-src="{{account.profileImageUrl}}">
+                <img class="bd-avatar-sm" ng-if="!account.profileImageUrl" ng-src="{{formData.PROFILE_DEFAULT}}">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <span>{{ 'ACCOUNT_MODULE.USERNAME' | translate }}: </span>
+                    <strong>{{account.username}}</strong>
+                </h4>
+                <h4 class="media-heading">
+                    <span>{{ 'ACCOUNT_MODULE.EMAIL' | translate }}: </span>
+                    <strong>{{account.email}}</strong>
+                </h4>
+                <h4 class="media-heading">
+                    <span>{{ 'ACCOUNT_MODULE.BALANCE' | translate }}: </span>
+                    <strong class="balance-text">{{account.credit ? account.credit : 0}}</strong>
+                </h4>
+                <h4 class="media-heading">
+                    <span>{{ 'ACCOUNT_MODULE.INSURE_BALANCE' | translate }}: </span>
+                    <strong class="balance-text">{{account.insureCredit ? account.insureCredit : 0}}</strong>
+                </h4>
+                <h4 class="media-heading">
+                    <span>{{ 'ACCOUNT_MODULE.FEE_BALANCE' | translate }}: </span>
+                    <strong class="balance-text">{{account.feeCredit ? account.feeCredit : 0}}</strong>
+                </h4>
+            </div>
+        </div>
+
+        <!--TRANSACTIONS-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>{{'USER_MANAGEMENT_HELPER.CREDIT_TRANSACTIONS.LIST' | translate}}</span>
+            </div>
+
+            <form>
+                <div class="input-group search-box">
+                    <input class="form-control" ng-model="selectData.query" ng-change="searchData()"
+                           placeholder="{{ 'SEARCH' | translate }}" type="text"/>
+                    <span class="input-group-addon">{{ tableConfig.totalItems }} {{'RECORDS_FOUND' | translate}}</span>
+                </div>
+            </form>
+
+            <!--DATE RANGE-->
+            <form class="form-inline transaction-date-range-wrapper">
+                <!--From date-->
+                <div class="form-group">
+                    <label for="startTime" class="control-label">
+                        {{'USER_MANAGEMENT_HELPER.CREDIT_TRANSACTIONS.FROM_DATE'| translate}}
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input date-range-picker
+                               options="datePickerOpts"
+                               class="form-control date-picker"
+                               type="text"
+                               id="startTime"
+                               ng-model="self.dateSearchModel.startDate"
+                               ng-required="true">
+                    </div>
+                </div>
+                <!--To date-->
+                <div class="form-group">
+                    <label for="endTime" class="control-label">
+                        {{'USER_MANAGEMENT_HELPER.CREDIT_TRANSACTIONS.TO_DATE'| translate}}
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input date-range-picker
+                               options="datePickerOpts"
+                               class="form-control date-picker"
+                               type="text"
+                               id="endTime"
+                               ng-model="self.dateSearchModel.endDate"
+                               ng-required="true">
+                    </div>
+                </div>
+                <span ng-if="self.formProcessing">
+                <i class="fa fa-spinner icon-spin" aria-hidden="true"></i>
+                </span>
+
+                <span class="red error-message" ng-if="message.dateRangeError">{{message.dateRangeError}}</span>
+            </form>
+
+
+            <div class="panel-body" ng-if="hasData()">
+                <div class="table-responsive">
+                    <table class="table" at-action-sortable-query at-sortable-query at-table at-paginated at-list="self.modelList.records" at-config="tableConfig">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr ng-class="getColor(item)">
+                            <td at-implicit at-sortable at-attribute="id" at-title="#"></td>
+                            <td at-sortable at-attribute="fromWallet" at-title="{{ 'CREDIT.FROM_USER' | translate }}">
+                                <span style="font-weight: bold">{{item.fromWallet.owner}}</span>
+                                <span style="font-style: oblique">({{item.fromWallet.name}})</span>
+                            </td>
+                            <td at-sortable at-attribute="targetWallet" at-title="{{ 'CREDIT.TO_USER' | translate }}">
+                                <span style="font-weight: bold">{{item.targetWallet.owner}}</span>
+                                <span style="font-style: oblique">({{item.targetWallet.name}})</span>
+                            </td>
+                            <td at-implicit at-sortable at-attribute="amount" at-title="{{ 'CREDIT.AMOUNT' | translate }}"></td>
+                            <td at-sortable at-attribute="createdDate" at-title="{{ 'CREATED_DATE' | translate }}">{{ item.createdDate | date: formData.DEFAULT_DATETIME_FORMAT}}</td>
+                            <!--<td at-implicit at-sortable at-attribute="type" at-title="{{ 'CREDIT.TYPE' | translate }}"></td>-->
+                            <td at-implicit at-sortable at-attribute="detail" at-title="{{ 'CREDIT.MESSAGE' | translate }}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <bd-pagination show-pagination="showPagination()"
+                                   items-per-page-list="itemsPerPageList"
+                                   table-config="tableConfig"
+                                   paging-options="pagingOptions"
+                                   on-item-per-page-change="onItemPerPageChange()"
+                                   change-page="changePage(pagingOptions.currentPage)">
+                    </bd-pagination>
+                </div>
+            </div>
+            <!--NO DATA-->
+            <div ng-show="!self.formProcessing && !hasData()" class="callout callout-default">
+                <p>{{ 'USER_MANAGEMENT_HELPER.CREDIT_TRANSACTIONS.NO_DATA' | translate }}</p>
+            </div>
+        </div>
+    </div>
+</div>

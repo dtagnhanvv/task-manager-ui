@@ -1,0 +1,80 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+    </div>
+    <form class="input-group col-sm-6 search-box">
+        <input class="form-control" ng-model="selectData.query" ng-change="searchData()" placeholder="{{ 'SEARCH' | translate }}" type="text"/>
+        <span class="input-group-addon">
+                {{ tableConfig.totalItems }} {{'RECORDS_FOUND' | translate}}
+            </span>
+    </form>
+    <div class="panel-body" ng-if="hasData()">
+        <div class="table-responsive">
+            <table class="table" at-action-sortable-query at-sortable-query at-table at-paginated at-list="self.modelList.records" at-config="tableConfig">
+                <thead>
+                <tr>
+                    <th ng-if="self.isAdmin || self.isSale" at-attribute="seller">{{ 'MY_BID_AUCTIONS.SELLER' | translate }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td at-title="#" at-implicit at-sortable at-attribute="id"></td>
+                    <td at-title="{{ 'ACTIONS' | translate }}">
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn " dropdown-toggle> {{ 'ACTIONS' | translate }} <span class="caret"></span></button>
+                            <ul class="dropdown-menu pull-right-dropdown" role="menu">
+                                <li><a ui-sref="^.^.^.productManagement.productDetail.list({productId: item.product, auctionId: item.id})">{{'BID_AUCTION.VIEW_DETAIL' | translate}}</a></li>
+                                <li ng-if="isAllowFinishAuction(item)">
+                                    <a ui-sref="^.^.^.auction.edit({id: item.id, from: 'myBidAuctions'})">{{'BID_AUCTION.EDIT' | translate}}</a>
+                                </li>
+                                <li ng-if="isAllowFinishAuction(item)">
+                                    <a ng-click="showListBidder(item)">{{'BID_AUCTION.FINISH_BIDDING_MANUAL' | translate}}</a>
+                                </li>
+                                <li ng-if="isAllowFinishAuction(item) && item.type !== 'manual'">
+                                    <a ng-click="finishAuctionEarly(item)">{{'BID_AUCTION.FINISH_BIDDING_EARLY' | translate}}</a>
+                                </li>
+                                <li ng-if="isAllowFinishAuction(item)"> 
+                                    <a ng-click="finishWithoutWinner(item)">{{'BID_AUCTION.FINISH_BIDDING_WITHOUT_WINNER' | translate}}</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </td>
+                    <td ng-if="self.isAdmin || self.isSale" at-sortable at-attribute="seller" at-title="{{ 'MY_BID_AUCTIONS.SELLER' | translate }}">{{item.seller.username}}</td>
+                    <td at-implicit at-sortable at-attribute="subject" at-title="{{ 'BID_AUCTION.SUBJECT' | translate }}">{{item.product.subject}}</td>
+                    <td at-sortable at-attribute="status" at-title="{{ 'BID_AUCTION.STATUS' | translate }}">
+                        <span ng-if="item.status !== AUCTION_STATUS.CLOSED" class="badge badge-info">{{'MY_BID_AUCTIONS.BIDDING_STATUS' | translate}}</span>
+                        <span ng-if="item.status === AUCTION_STATUS.CLOSED" class="badge badge-danger">{{'MY_BID_AUCTIONS.CLOSED_STATUS' | translate}}</span>
+                    </td>
+                    <td at-implicit at-attribute="bids.totalBids" at-title="{{ 'BID_AUCTION.TOTAL_BIDS' | translate }}"></td>
+                    <td at-implicit at-attribute="bids.totalBuyers" at-title="{{ 'BID_AUCTION.TOTAL_BIDDER' | translate }}"></td>
+                    <td at-implicit at-attribute="bids.highestPrice" at-title="{{ 'BID_AUCTION.HIGHEST_PRICE' | translate }}"></td>
+                    <td at-implicit at-attribute="bids.lowestPrice" at-title="{{ 'BID_AUCTION.LOWEST_PRICE' | translate }}"></td>
+                    <td at-sortable at-attribute="startDate" at-title="{{ 'BID_AUCTION.START_DATE' | translate }}">{{ item.startDate | date:DEFAULT_DATETIME_FORMAT}}</td>
+                    <td at-sortable at-attribute="endDate" at-title="{{ 'BID_AUCTION.END_DATE' | translate }}">{{ item.endDate | date:DEFAULT_DATETIME_FORMAT}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="flex-container">
+                <pagination ng-if="showPagination()"
+                            class="pagination"
+                            boundary-links="true"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            items-per-page="tableConfig.itemsPerPage"
+                            total-items="tableConfig.totalItems"
+                            ng-model="pagingOptions.currentPage"
+                            max-size="tableConfig.maxPages"
+                            ng-change="changePage(pagingOptions.currentPage)">
+                </pagination>
+                <div>
+                    <label class="items-per-page" for="selectItemsPerPage"> {{'ITEM_PER_PAGE' | translate}} </label>
+                    <select id="selectItemsPerPage" ng-change="onItemPerPageChange()" ng-model="tableConfig.itemsPerPage">
+                        <option ng-repeat="option in itemsPerPageList" value="{{option}}">{{option}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

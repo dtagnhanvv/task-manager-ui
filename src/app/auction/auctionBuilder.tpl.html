@@ -1,0 +1,209 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+        <div class="button-bar">
+            <button ng-if="!isShowBackToProductEdit()" ui-sref="^.list({productId: stateParams.productId})" class="btn btn-sm btn-primary" type="button">
+                <span class="glyphicon glyphicon-arrow-left"></span> {{'AUCTION.BACK_TO_LIST' | translate}}
+            </button>
+            <button ng-if="isShowBackToProductEdit()" ng-click="backToProductEdit()" class="btn btn-sm btn-primary" type="button">
+                <span class="glyphicon glyphicon-arrow-left"></span> {{'AUCTION.BACK_TO_PRODUCT' | translate}}
+            </button>
+        </div>
+        <div class="btn-group btnGrouped" dropdown>
+            <button type="button" class="btn " dropdown-toggle>
+                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ui-sref="^.list({productId: stateParams.productId})">{{'AUCTION.BACK_TO_LIST' | translate}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form name="auctionForm" class="col-lg-6 form-validation form-horizontal userForm" role="form" novalidate
+                  ng-submit="submit()">
+
+                <!--VALID_TIME-->
+                <div class="form-group">
+                    <label for="validTime" class="col-sm-3 control-label">
+                        {{'AUCTION.VALID_TIME'| translate}}
+                    </label>
+                    <div class="col-sm-9">
+                        <div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input date-range-picker
+                                       options="datePickerOpts"
+                                       class="form-control date-picker"
+                                       type="text"
+                                       id="validTime"
+                                       ng-model="model.validTime"
+                                       ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--PAYMENT-->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">{{'AUCTION.PAYMENT'| translate}}</label>
+                    <div class="col-sm-9">
+                        <!--credit-->
+                        <label class="radio-inline">
+                            <input type="radio" name="auctionPayment" ng-model="model.payment" ng-disabled="isUpdate()" ng-value="formData.AUCTION_PAYMENT_TYPE.CREDIT">
+                            <span>{{'AUCTION.PAYMENT_CREDIT'| translate}}</span>
+                        </label>
+                        <!--cash-->
+                        <label class="radio-inline">
+                            <input type="radio" name="auctionPayment" ng-model="model.payment" ng-disabled="isUpdate()" ng-value="formData.AUCTION_PAYMENT_TYPE.OFFLINE">
+                            <span>{{'AUCTION.PAYMENT_CASH'| translate}}</span>
+                        </label>
+
+                        <p class="help-block">{{'AUCTION.PAYMENT_HELP_TEXT' | translate}}</p>
+                    </div>
+                </div>
+
+                <!--LOWEST PRICE-->
+                <div class="form-group">
+                    <label for="lowestPrice" class="col-sm-3 control-label">
+                        {{'AUCTION.LOWEST_PRICE'| translate}} <span class="red">*</span>
+                    </label>
+                    <div class="col-sm-9">
+                        <p class="input-group">
+                        <input server-error name="lowestPrice" id="lowestPrice" type="text" class="form-control"
+                               ng-disabled="isUpdate()"
+                               ng-model="model.minimumPrice"
+                               ng-required="true"
+                               ng-pattern="/^\d+((\.|\,)\d+)?$/"
+                               placeholder="{{'VALIDATION.POSITIVE_NUM_ONLY' | translate}}">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default">credit</button>
+                            </span>
+                        </p>
+                        <span ng-if="message.minimumPriceError" class="error-message">{{message.minimumPriceError}}</span>
+                    </div>
+                </div>
+
+                <!-- SHOW BID-->
+                <div class="form-group">
+                    <label for="showBid" class="col-sm-3 control-label">
+                        {{'AUCTION.SHOW_BID'| translate}}
+                    </label>
+                    <div class="col-sm-9">
+                        <label class="ui-checkbox">
+                            <input server-error name="showBid" type="checkbox" ng-model="model.showBid" id="showBid">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+
+
+                <!--TYPE-->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">{{'AUCTION.TYPE'| translate}}</label>
+                    <div class="col-sm-9">
+                        <!--auto-->
+                        <label class="radio-inline">
+                            <input type="radio" name="auctionType" ng-model="model.type" ng-value="formData.AUCTION_TYPE.AUTO">
+                            <span>{{'AUCTION.AUTO_TYPE'| translate}}</span>
+                        </label>
+                        <!--manual-->
+                        <label class="radio-inline">
+                            <input type="radio" name="auctionType" ng-model="model.type" ng-value="formData.AUCTION_TYPE.MANUAL">
+                            <span>{{'AUCTION.MANUAL_TYPE'| translate}}</span>
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <div class="panel panel-default" ng-if="isAutomatedType()">
+                            <div class="panel-body">
+                                <!--OBJECTIVE-->
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">{{'AUCTION.OBJECTIVE'| translate}}</label>
+                                    <div class="col-sm-8">
+                                        <!--low-->
+                                        <label class="radio-inline">
+                                            <input type="radio" name="auctionObjective" ng-model="model.objective" ng-value="formData.AUCTION_OBJECTIVE.LOWEST_PRICE">
+                                            <span>{{'AUCTION.OBJECTIVE_LOWEST_PRICE'| translate}}</span>
+                                        </label>
+                                        <!--height-->
+                                        <label class="radio-inline">
+                                            <input type="radio" name="auctionObjective" ng-model="model.objective" ng-value="formData.AUCTION_OBJECTIVE.HIGHEST_PRICE">
+                                            <span>{{'AUCTION.OBJECTIVE_HIGHEST_PRICE'| translate}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!--increment value-->
+                                <div class="form-group" ng-if="isAutomatedType() && isShowNextPrice()">
+                                    <label for="incrementValue" class="col-sm-4 control-label">{{'AUCTION.INCREMENT_VALUE'| translate}}  <span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input server-error name="incrementValue" id="incrementValue" type="text" class="form-control"
+                                               ng-model="model.incrementValue"
+                                               ng-required="true"
+                                               ng-pattern="/^\d+((\.|\,)\d+)?$/"
+                                               placeholder="{{'VALIDATION.POSITIVE_NUM_ONLY' | translate}}"
+                                        >
+                                        <span ng-if="message.stepPriceError" class="error-message">{{message.stepPriceError}}</span>
+                                        <span ng-if="isInValidIncrementValue()" class="error-message">
+                                            {{'VALIDATION.PERCENT_LESS_THAN_100' | translate}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--increment type-->
+                                <div class="form-group" ng-if="isAutomatedType() && isShowNextPrice()">
+                                    <label class="col-sm-4 control-label">{{'AUCTION.INCREMENT_TYPE'| translate}}</label>
+                                    <div class="col-sm-8">
+                                        <!--PERCENT-->
+                                        <label class="radio-inline">
+                                            <input type="radio" name="auctionIncrementType" ng-model="model.incrementType" ng-value="formData.AUCTION_INCREMENT_TYPE.PERCENT">
+                                            <span>{{'AUCTION.INCREMENT_TYPE_PERCENT'| translate}}</span>
+                                        </label>
+                                        <!--CREDIT-->
+                                        <label class="radio-inline">
+                                            <input type="radio" name="auctionIncrementType" ng-model="model.incrementType" ng-value="formData.AUCTION_INCREMENT_TYPE.CREDIT">
+                                            <span>{{'AUCTION.INCREMENT_TYPE_CREDIT'| translate}}</span>
+                                        </label>
+
+                                        <span class="help-block" ng-if="model.incrementType && isFormValid()"
+                                              translate="AUCTION.INCREMENT_HELP_TEXT"
+                                              translate-value-price="{{model.incrementValue}}"
+                                              translate-value-unit="{{getUnitByIncrementType()}}">
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <!--BUTTONS-->
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button ng-disabled="!isFormValid() || self.formProcessing"
+                                type="submit"
+                                class="btn btn-success">
+                            {{ 'SUBMIT' | translate }}
+                        </button>
+                        <div ng-show="!isFormValid()" class="callout callout-danger">
+                            <p>{{ 'VALID_FORM' | translate }}</p>
+                            <p>{{ 'AUCTION.POSITIVE_ONLY_1' | translate }}</p>
+                            <p>{{ 'AUCTION.POSITIVE_ONLY_2' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

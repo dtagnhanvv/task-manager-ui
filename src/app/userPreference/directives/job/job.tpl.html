@@ -1,0 +1,22 @@
+<accordion close-others="true">
+    <accordion-group class="notUpperCase" ng-init="findServiceTabStatus = true" is-open="findServiceTabStatus">
+        <accordion-heading>
+            <div>
+                {{'USER_PREFERENCE.JOB_CONFIG_TITLE' | translate}}
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': findServiceTabStatus, 'glyphicon-chevron-right': !findServiceTabStatus}"></i>
+            </div>
+        </accordion-heading>
+
+        <span class="help-block">{{'USER_PREFERENCE.HELP_TEXT' | translate}}</span>
+        <div class="clearfix"></div>
+
+        <div class="jobs">
+                    <span ng-repeat="job in jobData.jobs track by $index" class="col-sm-6">
+                        <label class="ui-checkbox">
+                            <input type="checkbox" ng-model="job.checked" ng-checked="job.checked"><span>{{job.label}}</span>
+                        </label>
+                    </span>
+        </div>
+    </accordion-group>
+</accordion>

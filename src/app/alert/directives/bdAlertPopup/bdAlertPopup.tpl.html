@@ -1,0 +1,28 @@
+<div class="text-right alert-toolbar">
+    <a class="alert-mark-all-read" ng-click="markAllAsRead()">{{'ALERT.MARK_ALL_READ' | translate}}</a>
+</div>
+
+<perfect-scrollbar class="scroller alert-popup-container" wheel-propagation="true" wheel-speed="1" min-scrollbar-length="20">
+
+    <li class="bd-alert-item" ng-repeat="alert in model.list">
+        <div class="wrapper">
+            <i ng-if="!alert.isRead" class="fa fa-circle alert-unread-icon" style="float: right" ng-click="markAsRead(alert)"></i>
+            <span>{{alert.detail}}</span>
+            <div class="alert-summary text-extra">
+                <span><i class="fa fa-clock-o clock"></i> {{getTimePeriodSinceCreated(alert.createdDate)}}</span>
+                <a ng-click="goToDetail(alert)"
+                   class="viewDetail"
+                   ng-if="alert.targetType !== ALERT_TARGET_TYPE.BILL"
+                >{{'ALERT.VIEW_DETAIL' | translate}}</a>
+            </div>
+        </div>
+    </li>
+    <a ng-if="isShowGetMore && !formProcessing" ng-click="nextPage()" class="bd-extra-text">
+        {{'ALERT.GET_MORE' | translate}}
+    </a>
+    <div class="text-center" ng-show="formProcessing">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+
+</perfect-scrollbar>
+

@@ -1,0 +1,99 @@
+<accordion close-others="true">
+    <accordion-group class="notUpperCase" ng-init="basicTabStatus = true" is-open="basicTabStatus">
+        <accordion-heading>
+            <div>
+                {{'PRODUCT_MANAGEMENT.BASIC_INFO' | translate}}
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': basicTabStatus, 'glyphicon-chevron-right': !basicTabStatus}"></i>
+            </div>
+        </accordion-heading>
+        <div class="col-lg-8">
+            <!--BUSINESS_SETTING-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.BUSINESS_SETTING'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <label class="radio-inline radio-item" ng-repeat="setting in formData.businessSettings track by $index">
+                        <input type="radio" name="businessSetting"
+                               ng-model="basic.businessSetting"
+                               ng-value="setting.value">
+                        <span>{{setting.label}}</span>
+                    </label>
+                </div>
+            </div>
+
+
+            <!--SUBJECT-->
+            <div class="form-group">
+                <label for="subject" class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.SUBJECT'| translate}} <span class="red">*</span>
+                </label>
+                <div class="col-sm-9">
+                    <input server-error
+                           name="subject"
+                           id="subject"
+                           ng-model="basic.subject"
+                           ng-required="true"
+                           type="text"
+                           class="form-control">
+                </div>
+            </div>
+
+
+            <!--TAGS-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">{{'PRODUCT_MANAGEMENT.PRODUCT.TAGS'| translate}}</label>
+                <div class="col-sm-9">
+                    <oi-select oi-options="item.name for item in getTags($query)"
+                               ng-model="basic.productTags"
+                               multiple
+                               oi-select-options="{
+                                            newItem: true,
+                                            newItemModel: {id: null, name: $query},
+                                            saveTrigger: 'enter blur space . , ;'
+                                        }"
+                    >
+                    </oi-select>
+                </div>
+            </div>
+
+            <!--DETAIL-->
+            <div class="form-group">
+                <label for="detail" class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.DETAIL'| translate}} <span class="red">*</span>
+                </label>
+                <div class="col-sm-9">
+                        <textarea server-error class="form-control no-resize"
+                                  name="detail" id="detail"
+                                  ng-model="basic.detail" ng-required="true"
+                                  froala="froalaOptions">
+                        </textarea>
+                </div>
+            </div>
+
+            <!--MAP-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">{{'PRODUCT_MANAGEMENT.PRODUCT.LOCATION'| translate}}</label>
+                <div class="col-sm-9">
+                    <div class="pac-card" id="pac-card">
+                        <div id="pac-container">
+                            <input id="pac-input" type="text"
+                                   placeholder="{{'PRODUCT_MANAGEMENT.PRODUCT.MAP_SEARCH' | translate}}">
+                        </div>
+                    </div>
+                    <ng-map center="[{{mapConfig.center.lat}},{{mapConfig.center.lng}}]"
+                            zoom="{{mapConfig.zoom}}"
+                            on-click="onMapClick(event)"
+                            tilt="0">
+                        <marker position="{{mapConfig.marker.lat}},{{mapConfig.marker.lng}}"
+                                title="Drag me"
+                                draggable="true"
+                                on-dragend="onMapClick(event)">
+                        </marker>
+                    </ng-map>
+                </div>
+            </div>
+        </div>
+    </accordion-group>
+</accordion>

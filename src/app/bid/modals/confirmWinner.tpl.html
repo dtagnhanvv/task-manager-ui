@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ 'BIDDING.WINNER_CONFIRM_TITLE' | translate }}</h3>
+</div>
+<div class="modal-body">
+    <p translate="BIDDING.WINNER_CONFIRM_CONTENT_P1" translate-value-winner="{{ bidItem.buyer.username }}"></p>
+    <p translate="BIDDING.WINNER_CONFIRM_CONTENT_P2" translate-value-price="{{ bidItem.price }}"></p>
+</div>
+<div class="modal-dialog-footer">
+    <button class="btn btn-danger" ng-click="$close()">{{ 'BIDDING.AGREE' | translate }}</button>
+    <button class="btn btn-primary" ng-click="$dismiss()">{{ 'BIDDING.NOT_AGREE' | translate }}</button>
+</div>

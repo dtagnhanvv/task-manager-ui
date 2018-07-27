@@ -1,0 +1,235 @@
+<div slim-scroll>
+    <ul class="nav sidebar-menu" ng-controller="SideBar">
+        <!--<li ui-sref-active="active">-->
+        <!--<a ui-sref=".dashboard">-->
+        <!--<i class="menu-icon glyphicon glyphicon-home"></i>-->
+        <!--<span class="menu-text"> {{ 'NAVBAR.DASHBOARD' | translate }} </span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a href="#" class="menu-dropdown">-->
+        <!--<i class="menu-icon fa fa-user"></i>-->
+        <!--<span class="menu-text"> {{ 'NAVBAR.DASHBOARD' | translate }} </span>-->
+        <!--<i class="menu-expand"></i>-->
+        <!--</a>-->
+
+        <!--<ul class="submenu">-->
+        <!--<li ui-sref-active="active">-->
+        <!--<a ui-sref=".accountManagement.list">-->
+        <!--<span class="menu-text"> {{ 'NAVBAR.OVERVIEW' | translate }} </span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li ui-sref-active="active">-->
+        <!--<a ui-sref=".productManagement.list">-->
+        <!--<span class="menu-text"> {{ 'NAVBAR.TOP_POSTS' | translate }} </span>-->
+        <!--</a>-->
+        <!--</li>-->
+
+        <!--<li ui-sref-active="active">-->
+        <!--<a ui-sref=".billManagement.list">-->
+        <!--<span class="menu-text"> {{ 'NAVBAR.TOP_SELLERS' | translate }} </span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li ui-sref-active="active">-->
+        <!--<a ui-sref=".billManagement.list">-->
+        <!--<span class="menu-text"> {{ 'NAVBAR.TOP_BUYERS' | translate }} </span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</li>-->
+        <!--ACCOUNT_MANAGEMENT-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.ACCOUNT_MANAGEMENT' | translate }}</span>
+                <!--<i class=" menu-expand"></i>-->
+            </a>
+
+            <ul class="submenu">
+                <li ui-sref-active="active">
+                    <a ui-sref=".accountManagement.list">
+                        <span class="menu-text">{{ 'NAVBAR.ACCOUNTS' | translate }}</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".accountManagement.new">
+                        <span class="menu-text">{{ 'NAVBAR.NEW_ACCOUNT' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--SALE_MANAGEMENT-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.SALE_MANAGEMENT' | translate }}</span>
+                <!--<i class=" menu-expand"></i>-->
+            </a>
+
+            <ul class="submenu">
+                <li ui-sref-active="active">
+                    <a ui-sref=".saleManagement.list">
+                        <span class="menu-text">{{ 'NAVBAR.SALES' | translate }}</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".saleManagement.new">
+                        <span class="menu-text">{{ 'NAVBAR.NEW_SALE' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--PRODUCT_MANAGEMENT-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-edit"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.PRODUCT_MANAGEMENT' | translate }}</span>
+                <!--<i class="menu-expand"></i>-->
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="#" class="menu-dropdown">
+                        <span class="menu-text">{{ 'NAVBAR.GENERAL_PRODUCT_MANAGEMENT' | translate }}</span>
+                        <!--<i class="menu-expand"></i>-->
+                    </a>
+
+                    <ul class="submenu">
+                        <li ui-sref-active="active">
+                            <a ui-sref=".productManagement.product.list">
+                                <span class="menu-text">{{'PRODUCT_MANAGEMENT.PRODUCT.LIST' | translate }}</span>
+                            </a>
+                        </li>
+
+                        <li ui-sref-active="active">
+                            <a ui-sref=".productManagement.product.builder">
+                                <span class="menu-text">{{'PRODUCT_MANAGEMENT.PRODUCT.ADD' | translate }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--FREELANCE-->
+                <li>
+                    <a href="#" class="menu-dropdown">
+                        <span class="menu-text">{{ 'NAVBAR.FREELANCE_PRODUCT_MANAGEMENT' | translate }}</span>
+                        <!--<i class="menu-expand"></i>-->
+                    </a>
+
+                    <ul class="submenu">
+                        <li ui-sref-active="active">
+                            <a ui-sref=".productManagement.freelanceProduct.list">
+                                <span class="menu-text">{{'PRODUCT_MANAGEMENT.PRODUCT.LIST' | translate }}</span>
+                            </a>
+                        </li>
+
+                        <li ui-sref-active="active">
+                            <a ui-sref=".productManagement.freelanceProduct.builder">
+                                <span class="menu-text">{{'PRODUCT_MANAGEMENT.PRODUCT.ADD' | translate }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </li>
+
+        <!--BID_AUCTION_MANAGEMENT-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-gavel"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.BID_AUCTION_MANAGEMENT' | translate }}</span>
+                <!--<i class="menu-expand"></i>-->
+            </a>
+
+            <ul class="submenu">
+                <li ui-sref-active="active">
+                    <a ui-sref=".bid.myBidAuctions.list">
+                        <span class="menu-text">{{ 'NAVBAR.BID_AUCTIONS' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--BILL-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-exchange"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.BILL_MANAGEMENT' | translate }}</span>
+                <!--<i class="menu-expand"></i>-->
+            </a>
+
+            <ul class="submenu">
+                <li ui-sref-active="active">
+                    <a ui-sref=".bill.listIn">
+                        <span class="menu-text">{{ 'NAVBAR.BILLS' | translate }}
+                            <span class="badge badge-danger">{{needConfirmedTransactionCount}}</span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--TAG-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-tags"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.TAG_MANAGEMENT' | translate }}</span>
+                <!--<i class="menu-expand"></i>-->
+            </a>
+
+            <ul class="submenu">
+                <li ui-sref-active="active">
+                    <a ui-sref=".tag.list">
+                        <span class="menu-text">{{ 'NAVBAR.TAGS' | translate }}</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".tag.builder">
+                        <span class="menu-text">{{ 'NAVBAR.NEW_TAG' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--PROFILE-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-user-circle"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.ACCOUNT_INFO' | translate }}</span>
+                <!--<i class="menu-expand"></i>-->
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a ui-sref=".credit.creditTransaction.list">
+                        <i class="fa fa-dollar"></i>
+                        {{ 'WALLET' | translate }}
+                    </a>
+                </li>
+                <li ng-controller="Logout">
+                    <a ng-click="logout()">
+                        <i class="fa fa-sign-out"></i>
+                        {{ 'LOGOUT' | translate }}
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>

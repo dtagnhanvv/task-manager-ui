@@ -1,0 +1,47 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+    </div>
+    <div class="panel-body">
+        <tabset class="nav-tab-margin">
+            <tab ng-click="changeTab('NEED_CONFIRM')">
+                <tab-heading>
+                    {{ 'BILL.NEED_CONFIRM' | translate }}
+                    <span ng-if="count.unconfirmed" class="badge badge-danger">{{count.unconfirmed}}</span>
+                </tab-heading>
+                <bd-bills ng-if="isShowNeedConfirmTab()"
+                          bills="bills"
+                          count="count"
+                          color="'red-row'"
+                          bill-config="needConfirmBillConfig"
+                          bill-service="IncomeBillHelper"></bd-bills>
+            </tab>
+
+            <tab ng-click="changeTab('CONFIRMED')">
+                <tab-heading>
+                    {{ 'BILL.CONFIRMED' | translate }}
+                    <span ng-if="count.confirmed" class="badge badge-success">{{count.confirmed}}</span>
+                </tab-heading>
+                <bd-bills ng-if="isShowConfirmedTab()"
+                          bills="bills"
+                          count="count"
+                          color="'red-row'"
+                          bill-config="confirmedBillConfig"
+                          bill-service="IncomeBillHelper"></bd-bills>
+            </tab>
+
+            <tab ng-click="changeTab('REJECTED')">
+                <tab-heading>
+                    {{ 'BILL.REJECTED' | translate }}
+                    <span ng-if="count.rejected" class="badge">{{count.rejected}}</span>
+                </tab-heading>
+                <bd-bills ng-if="isShowRejectedTab()"
+                          bills="bills"
+                          count="count"
+                          color="'red-row'"
+                          bill-config="rejectedBillConfig"
+                          bill-service="IncomeBillHelper"></bd-bills>
+            </tab>
+        </tabset>
+    </div>
+</section>

@@ -1,0 +1,232 @@
+.rightMenu {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  list-style-type: none;
+  li {
+    display: inline;
+    padding-right: 10px;
+     a {
+       color : #fafafa;
+       text-decoration: none;
+       font-weight: 400;
+     }
+  }
+
+}
+
+.features {
+  margin:25px 0;
+}
+
+.service-icon {
+  max-height: 90px !important;
+}
+
+.thumbnail {
+  background-color: #ffffff;
+  border:0;
+  text-align:center;
+  .caption {
+    p {
+      color: #94a3a8;
+    }
+  }
+}
+
+.thumbnail img {
+  -moz-transition:all 0.6s ease;
+  -webkit-transition:all 0.6s ease;
+  -ms-transition:all 0.6s ease;
+  -o-transition:all 0.6s ease;
+  transition:all 0.6s ease;
+}
+.thumbnail:hover img {
+  -moz-transform:scale(1.05);
+  -webkit-transform:scale(1.05);
+  -o-transform:scale(1.05);
+  -ms-transform:scale(1.05);
+  transform:scale(1.05);
+  z-index:2;
+}
+
+.logo-landing-page {
+  padding: 200px 0;
+  text-align:center;
+   h1 {
+     font-size: 50px;
+   }
+}
+
+.section-title {
+  h2 {text-align: center}
+}
+
+.header-landingpage {
+  padding: 60px 15px;
+  color: #FFF;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  background-color: #6883cc;
+  background-image:url("../../../../assets/images/header.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#get-in-touch {
+  padding: 100px 0 50px;
+  background-image: -webkit-linear-gradient(90deg,#08467d 0,#2c8cb3 100%);
+  background-image: -ms-linear-gradient(90deg,#08467d 0,#2c8cb3 100%);
+  color: #fff;
+  .section-header {
+    margin-bottom: 50px;
+    .section-title {
+        font-size: 44px;
+        color: #272727;
+        text-transform: uppercase;
+        position: relative;
+        padding-bottom: 20px;
+        margin: 0 0 20px;
+        color: inherit;
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 140px;
+          bottom: 0;
+          left: 50%;
+          margin-left: -70px;
+          height: 1px;
+          background: #ebebeb;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          bottom: -11px;
+          left: 50%;
+          margin-left: -12px;
+          border: 5px solid #fff;
+          border-radius: 20px;
+          background: #45aed6;
+        }
+    }
+
+    p {
+      visibility: visible;
+      animation-name: fadeInDown;
+    }
+  }
+
+}
+
+#main-footer {
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-color: #fff;
+  position: relative;
+  text-align: center;
+
+  ul {
+    border-top: 1px solid #eff1f3;
+    text-align: center;
+    padding-top: 40px;
+    position: relative;
+    margin-left: 0;
+
+    li {
+      padding-left: 17px;
+      display: inline-block;
+      color: #71818c;
+      a {
+        color: #20292f;
+      }
+    }
+  }
+
+  .container {
+    margin: 0 auto;
+    max-width: 1120px;
+    padding: 0 80px;
+    padding-bottom: 80px;
+    padding-top: 80px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+  }
+
+  .container:last-of-type {
+    padding-bottom: 0 !important;
+  }
+  .container:first-of-type {
+    padding-top: 0 !important;
+  }
+
+  #logos {
+    margin-bottom: 20px;
+    clear: both;
+    position: relative;
+
+    a {
+      text-decoration: none;
+      padding-left: 22px;
+      display: inline-block
+    }
+  }
+
+  #copyright {
+    display: block;
+    padding: 0 0 40px;
+    clear: both;
+    text-align: center;
+    a {
+      color: #20292f;
+      display: inline-block;
+      width: 72px;
+      height: 39px;
+      font-size: 16px;
+      background-position: 10px 10px;
+      padding: 10px 0 0 50px;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 17px;
+      transition: background-color .5s ease;
+      -webkit-transition: background-color .5s ease;
+
+      span {
+        color: #71818c;
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+        display: block;
+      }
+    }
+
+    #twitter {
+      background-image: url('https://www.elegantthemes.com/img/twitter.png');
+      background-size: 32px 26px;
+      margin-right: 40px;
+    }
+
+    #facebook {
+      background-image: url('https://www.elegantthemes.com/img/facebook.png');
+      margin-right: 40px;
+      margin-left: -10px;
+      background-size: 15px 30px;
+      background-position: 20px 10px;
+    }
+
+    #email {
+      background-image: url('https://www.elegantthemes.com/img/newsletter.png');
+      background-size: 30px 22px;
+    }
+  }
+}

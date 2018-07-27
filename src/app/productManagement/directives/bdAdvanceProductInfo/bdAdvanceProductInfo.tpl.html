@@ -1,0 +1,96 @@
+<accordion>
+    <accordion-group class="notUpperCase" ng-init="advanceTabStatus = false" is-open="advanceTabStatus">
+        <accordion-heading>
+            <div>
+                {{'PRODUCT_MANAGEMENT.PRODUCT.ADVANCE_SETTINGS' | translate}}
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': advanceTabStatus, 'glyphicon-chevron-right': !advanceTabStatus}"></i>
+            </div>
+        </accordion-heading>
+        <div class="col-lg-8">
+            <!--MODE-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.MODE'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <label class="radio-inline radio-item" ng-repeat="mode in formData.modes track by $index">
+                        <input type="radio" name="mode"
+                               ng-model="advance.mode"
+                               ng-value="mode.value">
+                        <span>{{mode.label}}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--ADDRESS-->
+            <div class="form-group">
+                <label for="address" class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.ADDRESS'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input server-error
+                           name="address"
+                           id="address"
+                           ng-model="advance.address"
+                           ng-required="false"
+                           type="text"
+                           class="form-control">
+                </div>
+            </div>
+
+            <!--BUSINESS_RULE-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.BUSINESS_RULE'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <label class="radio-inline radio-item" ng-repeat="businessRule in formData.businessRules track by $index">
+                        <input type="radio" name="businessRule"
+                               ng-model="advance.businessRule"
+                               ng-value="businessRule.value">
+                        <span>{{businessRule.label}}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--VISIBILITY-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.VISIBILITY'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <label class="radio-inline radio-item" ng-repeat="visibility in formData.visibilities track by $index">
+                        <input type="radio" name="visibility"
+                               ng-model="advance.visibility"
+                               ng-value="visibility.value">
+                        <span>{{visibility.label}}</span>
+                        <i ng-if="visibility.value == 'private'" class="material-icons small-icon">lock</i>
+                        <i ng-if="visibility.value == 'everyone'" class="material-icons small-icon">public</i>
+                        <i ng-if="visibility.value == 'customPrivate'" class="material-icons small-icon">people</i>
+                    </label>
+                </div>
+            </div>
+
+
+            <!--COMMENT_VISIBILITY-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'PRODUCT_MANAGEMENT.PRODUCT.COMMENT_VISIBILITY'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <label class="radio-inline radio-item" ng-repeat="commentVisibility in formData.commentVisibilities track by $index">
+                        <input type="radio" name="commentVisibility"
+                               ng-model="advance.commentVisibility"
+                               ng-value="commentVisibility.value">
+                        <span>{{commentVisibility.label}}</span>
+                        <i ng-if="commentVisibility.value == 'private'" class="material-icons small-icon">lock</i>
+                        <i ng-if="commentVisibility.value == 'everyone'" class="material-icons small-icon">public</i>
+                        <i ng-if="commentVisibility.value == 'customPrivate'" class="material-icons small-icon">people</i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </accordion-group>
+</accordion>

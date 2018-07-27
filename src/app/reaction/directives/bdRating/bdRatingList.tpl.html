@@ -1,0 +1,25 @@
+<bd-rating-summary rating-summary="rateSummary"></bd-rating-summary>
+
+<ul class="list-group">
+    <li class="list-group-item reaction-row" ng-repeat="rating in self.modelList">
+        <div class="bd-flex bd-flex-v-center">
+            <!--avatar-->
+            <div class="bd-avatar-wrapper text-center">
+                <img ng-if="rating.reviewer.profileImageUrl" ng-src="{{ rating.reviewer.profileImageUrl }}" alt="" class="bd-avatar">
+                <img ng-if="!rating.reviewer.profileImageUrl" src="assets/images/anonymous.gif" alt="" class="bd-avatar">
+            </div>
+            <!--STARTS-->
+            <div class="awesomeRating" awesome-rating="rating.rateValue" awesome-rating-options="self.ratingOptions"></div>
+
+            <span class="bd-reaction-info"> .{{getTimePeriodSinceCreated(rating.createdDate)}}</span>
+
+        </div>
+        <!--content-->
+        <div class="rating-content-view">
+            {{rating.rateMessage}}
+        </div>
+    </li>
+</ul>
+<button ng-if="self.allowNextPage" class="btn btn-link bd-extra-text-bold"
+        ng-click="loadMore()">{{'REACTION_DETAIL.GET_MORE' | translate}}
+</button>

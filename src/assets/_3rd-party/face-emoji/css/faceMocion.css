@@ -1,0 +1,150 @@
+.faceMocion {
+    display: none;
+    padding: 8px 8px 8px 0px;
+    box-sizing: border-box;
+    background: white;
+    position: absolute;
+    width: auto;
+    height: 65px;
+    line-height: 25px;
+    border-radius: 50px;
+    transition: .25 sease-in-out;
+    color: black;
+    border: 1px solid #eee;
+    -webkit-box-shadow: 4px 4px 21px -9px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: 4px 4px 21px -9px rgba(0, 0, 0, 0.55);
+    box-shadow: 4px 4px 21px -9px rgba(0, 0, 0, 0.55);
+}
+
+@media only screen and (max-width: 768px) {
+    .faceMocion {
+        height: 42px !important;
+    }
+
+    .faceMocion div {
+        width: 24px !important;
+        height: 24px !important;
+        background-size: 24px !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .selectorFace {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .molesto {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .asusta {
+        background: url(sqhTN9lgaY1.png) 0 -24px !important;
+    }
+
+    .divierte {
+        background: url(sqhTN9lgaY1.png) 0 -48px !important;
+    }
+
+    .gusta {
+        background: url(sqhTN9lgaY1.png) 0 -72px !important;
+    }
+
+    .amo {
+        background: url(sqhTN9lgaY1.png) 0 -96px !important;
+    }
+
+    .triste {
+        background: url(sqhTN9lgaY1.png) 0 -120px !important;
+    }
+
+    .asombro {
+        background: url(sqhTN9lgaY1.png) 0 -144px !important;
+    }
+
+    .alegre {
+        background: url(sqhTN9lgaY1.png) 0 -163px !important;
+    }
+
+}
+
+.faceMocion div {
+    margin-left: 8px;
+    float: left;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.selectorFace {
+    margin-left: 8px;
+    float: left;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.faceMocion div:hover {
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    -ms-transform: scale(1.25);
+    -o-transform: scale(1.25);
+    transform: scale(1.25);
+}
+
+.molesto {
+    margin-left: 8px;
+    float: left;
+    width: 48px;
+    height: 48px;
+    background: url(sqhTN9lgaY1.png) 0 0;
+}
+
+.asusta {
+    background: url(sqhTN9lgaY1.png) 0 -48px;
+}
+
+.divierte {
+    background: url(sqhTN9lgaY1.png) 0 -96px;
+}
+
+.gusta {
+    background: url(sqhTN9lgaY1.png) 0 -144px;
+}
+
+.amo {
+    background: url(sqhTN9lgaY1.png) 0 -192px;
+}
+
+.triste {
+    background: url(sqhTN9lgaY1.png) 0 -240px;
+}
+
+.asombro {
+    background: url(sqhTN9lgaY1.png) 0 -288px;
+}
+
+.alegre {
+    background: url(sqhTN9lgaY1.png) 0 -336px;
+}
+
+.MensajeTexto {
+    display: none;
+    position: absolute;
+    border: 1px solid #333;
+    background-color: #161616;
+    border-radius: 5px;
+    padding: 3px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+.IconoPequenio {
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+    background-repeat: no-repeat;
+}

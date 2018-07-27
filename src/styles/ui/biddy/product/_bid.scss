@@ -1,0 +1,43 @@
+.bids {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 5px 0;
+}
+
+.load-more-bid {
+  @extend .bd-extra-text;
+  color: #0b58a2;
+  padding: 10px;
+}
+
+.bid-form {
+  margin: 5px 10px;
+}
+
+.bids-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-left: 10px;
+}
+
+.no-bid-data {
+  padding-left: 10px;
+}
+
+.bid-panel-title {
+  padding-top: 7.5px;
+}
+
+.bid-result {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  .bid-title {
+    font-weight: bold;
+    font-size: 1.4em;
+    color: red;
+  }
+  .winner-name{
+    font-weight: bold;
+    color: green;
+  }
+}

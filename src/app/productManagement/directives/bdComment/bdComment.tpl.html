@@ -1,0 +1,56 @@
+<div class="row bd-comment-flex-container">
+    <!--avatar-->
+    <div class="bd-avatar-wrapper text-center">
+        <img ng-if="comment.author.profileImageUrl" ng-src="{{comment.author.profileImageUrl}}" alt="" class="bd-avatar">
+        <img ng-if="!comment.author.profileImageUrl" src="assets/images/anonymous.gif" alt="" class="bd-avatar">
+    </div>
+    <!--content-->
+    <div class="bd-comment-content" ng-class="!self.isEditMode ? 'comment-bg' : 'comment-bg-white'">
+        <div ng-show="!self.isEditMode">
+            <span class="bd-comment-content-username">{{comment.author.username}}</span>
+            <!--MENU DROPDOWN-->
+            <div class="btn-group bd-comment-actions bd-right" dropdown ng-if="showMenuDropdown(comment)">
+                <button type="button" class="btn btn-link bd-btn-no-padding bd-menu-comment-btn" dropdown-toggle><i class="fa fa-caret-down"></i></button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a id="btnEditComment" ng-click="toggleEditorMode(true)" ng-if="allowEdit(comment)">{{'EDIT_ACTION' | translate}}</a></li>
+                    <li><a ng-click="confirmDeletion(comment, $index)">{{'DELETE_ACTION' | translate}}</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="bd-comment-content-flex-container">
+            <!--EDITOR-->
+            <div class="comment-editor">
+                <!--EDITOR-->
+                <div ng-model="comment.content"
+                     class="fr-vi"
+                     ng-required="true"
+                     froala="froalaOptions"
+                     froala-init="initialize(initControls)">
+                </div>
+                <!--SAVE & CANCEL-->
+                <button ng-show="self.isEditMode" class="btn btn-link badge badge-success" ng-disabled="!comment.content" ng-click="updateComment(comment)">{{'COMMENT_POST.UPDATE_DONE' | translate}}</button>
+                <button ng-show="self.isEditMode" class="btn btn-link" ng-click="toggleEditorMode(false)">{{'COMMENT_POST.UPDATE_CANCEL' | translate}}</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="bd-comment-footer">
+    <!--REACTION-->
+    <bd-comment-reaction class="bd-left width-100" watch-manager="watchManager" reactions-data="reactionData" ng-if="!self.isEditMode"></bd-comment-reaction>
+    <div class="clearfix"></div>
+    <!--TOGGLE-->
+    <div ng-if="comment.childComments && comment.childComments.length > 0">
+        <button class="btn btn-link bd-reaction-info" ng-show="comment.isShowChild" ng-click="hideComment()">{{'REACTION_DETAIL.HIDE_COMMENT' | translate}}</button>
+        <button class="btn btn-link bd-reaction-info" ng-show="!comment.isShowChild" ng-click="showComment()">{{'REACTION_DETAIL.SHOW_COMMENT' | translate}}</button>
+    </div>
+    <!--childComments-->
+    <div ng-repeat="childComment in comment.childComments" ng-show="comment.isShowChild">
+        <bd-child-comment comment="childComment" parent="comment" product="product" watch-manager="watchManager" is-child="true"></bd-child-comment>
+    </div>
+    <button ng-show="comment.isShowChild && self.allowNextPage" class="btn btn-link bd-reaction-info" ng-click="loadMoreComment()">{{'REACTION_DETAIL.GET_MORE' | translate}}</button>
+</div>

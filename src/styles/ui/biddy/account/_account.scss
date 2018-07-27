@@ -1,0 +1,18 @@
+.bd-profile-img {
+  width: 96px;
+  height: 96px;
+}
+
+.bd-profile-img-head {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-top: -4px;
+}
+
+@media only screen and (max-width: $screen-sm) {
+  .bd-profile-img {
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -1,0 +1,7 @@
+<div class="image-upload-wrapper">
+    <label class="picker" for="{{options.eventName}}">
+        <span ng-if="!outputData">Chọn ảnh <i class="fa fa-upload"></i> </span>
+        <img ng-src="{{outputData}}" ng-show="outputData && outputData" class="preview">
+    </label>
+    <input name="uploadFile" id="{{options.eventName}}" class="uploadFile-picker" type="file" nv-file-select="" uploader="uploader"/><br/>
+</div>

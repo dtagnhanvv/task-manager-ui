@@ -1,0 +1,51 @@
+$startColor: #FDD05B;
+
+.rating-content {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.awesomeRating {
+  padding-left: 10px;
+  padding-top: 3px;
+  min-width: 80px;
+}
+
+.rating-content-view {
+  padding: 10px 10px 10px 50px;
+}
+
+.btn-grey {
+  background-color: #D8D8D8;
+  color: #FFF;
+}
+
+.rating-block {
+  //background-color: #FAFAFA;
+  border-right: 1px solid #EFEFEF;
+  padding: 15px 15px 20px 15px;
+  border-radius: 3px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.padding-bottom-7 {
+  padding-bottom: 7px;
+}
+
+.bd-rate-progress-wrapper {
+  flex-grow: 2;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+
+.bd-rate-progress {
+  flex-grow: 2;
+}
+
+.bd-star {
+  color: $startColor;
+}

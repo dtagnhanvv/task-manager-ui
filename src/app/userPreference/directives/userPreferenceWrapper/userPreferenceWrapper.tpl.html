@@ -1,0 +1,21 @@
+<form name="userPreference" class="col-lg-12 form-validation form-horizontal userForm" role="form" novalidate ng-submit="submit()">
+
+    <!--User preference-->
+    <div class="form-group">
+        <div class="col-sm-12">
+            <user-preference user-preference-data="account.userPreferences"></user-preference>
+        </div>
+    </div>
+
+    <!--buttons-->
+    <div class="form-group">
+        <div class="col-sm-12">
+            <button ng-disabled="!isFormValid() || self.formProcessing"
+                    type="submit"
+                    class="btn btn-success">
+                {{ 'SUBMIT' | translate }}
+            </button>
+        </div>
+    </div>
+
+</form>

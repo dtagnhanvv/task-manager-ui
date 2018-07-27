@@ -1,0 +1,54 @@
+<div class="form-group">
+    <accordion close-others="true">
+        <accordion-group class="notUpperCase" ng-init="findServiceTabStatus = true" is-open="findServiceTabStatus">
+            <accordion-heading>
+                <div>
+                    {{'USER_PREFERENCE.FIND_SERVICE' | translate}}
+                    <i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-down': findServiceTabStatus, 'glyphicon-chevron-right': !findServiceTabStatus}"></i>
+                </div>
+            </accordion-heading>
+
+            <div ng-repeat="service in userPreferenceData.findServices track by $index" class="user-preference-checkbox-item">
+                <label class="ui-checkbox">
+                    <input type="checkbox" ng-model="service.checked" ng-checked="service.checked"><span>{{service.label}}</span>
+                </label>
+            </div>
+        </accordion-group>
+    </accordion>
+</div>
+<!--Provide service-->
+<div class="form-group">
+    <accordion>
+        <accordion-group class="notUpperCase" ng-init="provideServiceTabStatus = true" is-open="provideServiceTabStatus">
+            <accordion-heading>
+                <div>
+                    {{'USER_PREFERENCE.PROVIDE_SERVICE' | translate}}
+                    <i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-down': provideServiceTabStatus, 'glyphicon-chevron-right': !provideServiceTabStatus}"></i>
+                </div>
+            </accordion-heading>
+
+            <div ng-repeat="service in userPreferenceData.provideServices.services track by $index" class="user-preference-checkbox-item">
+                <label class="ui-checkbox">
+                    <input type="checkbox" ng-model="service.checked" ng-checked="service.checked"><span>{{service.label}}</span>
+                </label>
+            </div>
+
+            <!--TRANSPORT CONFIG-->
+            <div ng-if="isShowTransportConfig()">
+                <transport-config transport-config-data="userPreferenceData.provideServices.transportConfig"
+                                  services="userPreferenceData.provideServices.services"
+                ></transport-config>
+            </div>
+
+
+            <!--Job CONFIG-->
+            <div ng-if="isShowExperienceJob()">
+                <experience-job-config job-data="userPreferenceData.provideServices.jobConfig"></experience-job-config>
+            </div>
+
+
+        </accordion-group>
+    </accordion>
+</div>

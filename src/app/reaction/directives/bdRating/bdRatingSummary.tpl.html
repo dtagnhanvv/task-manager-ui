@@ -1,0 +1,22 @@
+<div class="bd-flex">
+    <div class="rating-block">
+        <h4>{{'RATING.AVERAGE' | translate}}</h4>
+        <h2 class="bold padding-bottom-7">{{ratingSummary.average}}
+            <small>/ {{ratingSummary.total}} đánh giá </small>
+        </h2>
+        <div class="awesomeRating" awesome-rating="ratingSummary.stars" awesome-rating-options="self.ratingOptions"></div>
+    </div>
+    <div class="bd-rate-progress-wrapper">
+        <div class="bd-flex" ng-repeat="(star , count) in ratingSummary.detail track by $index">
+            <div>{{star}} <span class="glyphicon glyphicon-star bd-star"></span></div>
+            <div class="progress bd-rate-progress">
+                <div class="progress-bar"
+                     ng-class="startColor[star]"
+                     aria-valuemax="100"
+                     role="progressbar" style="width: {{(100 * count)/ratingSummary.total}}%">
+                    {{count}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

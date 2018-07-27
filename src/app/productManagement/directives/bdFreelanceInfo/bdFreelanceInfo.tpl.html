@@ -1,0 +1,60 @@
+<accordion close-others="true">
+    <accordion-group class="notUpperCase" ng-init="freelanceTabStatus = true" is-open="freelanceTabStatus">
+        <accordion-heading>
+            <div>
+                {{'PRODUCT_MANAGEMENT.FREELANCE_REQUIREMENT' | translate}}
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': freelanceTabStatus, 'glyphicon-chevron-right': !freelanceTabStatus}"></i>
+            </div>
+        </accordion-heading>
+
+        <div class="col-lg-8">
+            <!--SEX-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'FREELANCE.SEX'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <label class="radio-inline radio-item" ng-repeat="gender in formData.SEX track by $index">
+                        <input type="radio" name="gender"
+                               ng-model="freelance.gender"
+                               ng-value="gender.value">
+                        <span>{{gender.label | translate}}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--AGE_RANGE-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'FREELANCE.AGE'| translate}}
+                </label>
+                <div class="col-sm-9">
+                    <label class="radio-inline radio-item" ng-repeat="age in formData.AGE_RANGE track by $index">
+                        <input type="radio" name="age"
+                               ng-model="freelance.ages"
+                               ng-value="age.value">
+                        <span>{{age.label | translate}}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--TAGS-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">{{'FREELANCE.SKILLS'| translate}}</label>
+                <div class="col-sm-9">
+                    <oi-select oi-options="item.name for item in []"
+                               ng-model="freelance.skills"
+                               multiple
+                               oi-select-options="{
+                                            newItem: true,
+                                            newItemModel: {id: null, name: $query},
+                                            saveTrigger: 'enter blur;'
+                                        }"
+                    >
+                    </oi-select>
+                </div>
+            </div>
+        </div>
+    </accordion-group>
+</accordion>

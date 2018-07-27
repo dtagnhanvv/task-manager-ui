@@ -1,0 +1,42 @@
+<div class="post-detail-container">
+    <div class="bd-flex-container bd-flex-horizontal-start bd-flex-vertical-start post-detail-heading">
+        <!--avatar-->
+        <div class="bd-avatar-wrapper">
+            <img ng-if="product.seller.profileImageUrl" ng-src="{{product.seller.profileImageUrl}}" alt="" class="bd-avatar">
+            <img ng-if="!product.seller.profileImageUrl" src="assets/images/anonymous.gif" alt="" class="bd-avatar">
+        </div>
+
+        <div class="bd-comment-content-title">
+            <span class="bd-comment-content-username">{{product.seller.username}} </span>
+            {{'POST_DETAIL.SHARED' | translate}}
+            <span class="bd-comment-content-username">{{product.subject}} </span>
+            <p class="bd-reaction-info"> {{self.timePeriodSinceCreatedProduct}}
+                <span>
+                    <span ng-if="product.visibility == 'private'"><i class="material-icons small-icon">lock</i></span>
+                    <span ng-if="product.visibility == 'everyone'"><i class="material-icons small-icon">public</i></span>
+                    <span ng-if="product.visibility == 'customPrivate'"><i class="material-icons small-icon">people</i></span>
+                </span>
+            </p>
+
+        </div>
+    </div>
+
+    <div id="post-content" class="post-content" ng-class="self.summaryMode ? 'bd-post-summary' : ''">
+        <div id="froala-editor" ng-model="product.detail" class="fr-vi bd-post_editor"
+             froala="froalaOptions" froala-init="initialize(initControls)">
+        </div>
+        <!--MAP-->
+        <div ng-if="self.showMap" style="margin-top: 10px">
+            <ng-map center="[{{mapConfig.center.lat}},{{mapConfig.center.lng}}]" zoom="{{mapConfig.zoom}}">
+                <marker position="{{mapConfig.marker.lat}},{{mapConfig.marker.lng}}">
+                </marker>
+            </ng-map>
+        </div>
+    </div>
+
+    <div ng-if="!self.tooSmall">
+        <button class="btn btn-link bd-extra-text" ng-if="self.summaryMode" ng-click="changeSummaryMode(false)">{{'POST_DETAIL.SHOW_DETAIL' | translate}}</button>
+        <button class="btn btn-link bd-extra-text" ng-if="!self.summaryMode" ng-click="changeSummaryMode(true)">{{'POST_DETAIL.SHOW_SUMMARY' | translate}}</button>
+    </div>
+
+</div>

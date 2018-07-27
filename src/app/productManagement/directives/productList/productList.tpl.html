@@ -1,0 +1,221 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+
+        <div class="button-bar">
+            <button ui-sref="^.builder" class="btn btn-primary btn-sm" type="button">
+                <span class="glyphicon glyphicon-plus"></span>{{'PRODUCT_MANAGEMENT.PRODUCT.ADD_BUTTON'| translate}}
+            </button>
+        </div>
+        <div class="btn-group btnGrouped" dropdown>
+            <button type="button" class="btn " dropdown-toggle><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ui-sref="^.builder">{{'PRODUCT_MANAGEMENT.PRODUCT.ADD_BUTTON'| translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--SEARCH ALL-->
+    <form class="input-group col-sm-6 search-box">
+        <input class="form-control" ng-model="selectData.query"
+               ng-change="searchData()"
+               placeholder="{{ 'SEARCH' | translate }}" type="text"/>
+        <span class="input-group-addon">{{ tableConfig.totalItems }} {{'RECORDS_FOUND' | translate}}</span>
+    </form>
+
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th ng-repeat="column in columns track by $index" ng-click="sort(column)">{{columnsTitle[column]}}
+                        <span class="glyphicon glyphicon-minus" ng-if="'ACTIONS' !== column && sortData[column] !== 'desc' && sortData[column] !== 'asc' && column != 'productTags'"></span>
+                        <span ng-if="'ACTIONS' !== column  && column != 'productTags'" class="glyphicon"
+                              ng-class="{'glyphicon-chevron-up':sortData[column] === 'asc','glyphicon-chevron-down':sortData[column] === 'desc'}"></span>
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td></td>
+
+                    <td class="id-col">
+                        <input name="id" id="id" ng-model="searchModel.idd" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                    <!--subject-->
+                    <td>
+                        <input name="subject" id="subject" ng-change="filter()" ng-model="searchModel.subject" type="text" class="input-sm form-control">
+                    </td>
+                    <!--tag-->
+                    <td class="id-col">
+                        <input name="productTags" id="productTags" ng-model="searchModel.productTags" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+                    <!--seller-->
+                    <td>
+                        <input name="seller" id="seller" ng-model="searchModel.seller" ng-change="filter()" type="text" class="input-sm form-control">
+
+                        <!--<ui-select name="seller" id="seller"-->
+                        <!--ng-model="searchModel.seller"-->
+                        <!--on-select="filter( $item, SELLER_BOX )">-->
+                        <!--<ui-select-match>{{ $select.selected.username }}</ui-select-match>-->
+                        <!--<ui-select-choices repeat="account in formData.accounts | filter:$select.search"-->
+                        <!--infinite-scroll="getMoreAccount()"-->
+                        <!--infinite-scroll-container="'#selectSeller'"-->
+                        <!--id="selectSeller"-->
+                        <!--infinite-scroll-distance="500"-->
+                        <!--refresh="searchAccount($select.search)"-->
+                        <!--refresh-delay="500">-->
+                        <!--{{ account.username }}-->
+                        <!--</ui-select-choices>-->
+                        <!--</ui-select>-->
+                    </td>
+                    <!--mode-->
+                    <td>
+                        <isteven-multi-select id="mode"
+                                              input-model="formData.modes"
+                                              max-labels="1"
+                                              output-model="searchModel.mode"
+                                              button-label="label"
+                                              item-label="label"
+                                              tick-property="ticked"
+                                              translation="localLang"
+                                              on-close="filter()">
+                        </isteven-multi-select>
+
+                    </td>
+                    <!--visibility-->
+                    <td>
+                        <isteven-multi-select id="visibility"
+                                              input-model="formData.visibilities"
+                                              max-labels="3"
+                                              output-model="searchModel.visibility"
+                                              button-label="icon"
+                                              item-label="icon label"
+                                              tick-property="ticked"
+                                              translation="localLang"
+                                              on-close="filter()">
+                        </isteven-multi-select>
+                    </td>
+                    <!--businessSetting-->
+                    <td>
+                        <isteven-multi-select id="businessSetting"
+                                              input-model="formData.businessSettings"
+                                              max-labels="1"
+                                              output-model="searchModel.businessSetting"
+                                              button-label="label"
+                                              item-label="label"
+                                              tick-property="ticked"
+                                              translation="localLang"
+                                              on-close="filter()">
+                        </isteven-multi-select>
+                    </td>
+                    <!--&lt;!&ndash;businessRule&ndash;&gt;-->
+                    <!--<td>-->
+                    <!--<isteven-multi-select id="businessRule"-->
+                    <!--input-model="formData.businessRules"-->
+                    <!--max-labels="1"-->
+                    <!--output-model="searchModel.businessRule"-->
+                    <!--button-label="label"-->
+                    <!--item-label="label"-->
+                    <!--tick-property="ticked"-->
+                    <!--helper-elements=""-->
+                    <!--on-close="filter()">-->
+                    <!--</isteven-multi-select>-->
+                    <!--</td>-->
+                    <!--validTime-->
+                    <!--<td>-->
+                    <!--<input ng-model="searchModel.validTime" ng-change="filter()" type="text" class="input-sm form-control">-->
+                    <!--</td>-->
+                    <!--createdDate-->
+                    <td>
+                        <input name="createdDate" id="createdDate" ng-model="searchModel.createdDate" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+                    <td>
+                        <input name="rating" id="rating" ng-model="searchModel.rating" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+                    <td ng-if="isShowFreelance()">
+                        <input name="ages" id="ages" ng-model="searchModel.ages" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+                    <td ng-if="isShowFreelance()">
+                        <input name="ages" id="gender" ng-model="searchModel.gender" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+                    <td ng-if="isShowFreelance()">
+                        <input name="ages" id="skills" ng-model="searchModel.skills" ng-change="filter()" type="text" class="input-sm form-control">
+                    </td>
+
+                </tr>
+
+
+                <tr ng-repeat=" item in self.products.records track by $index">
+                    <td>
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn btn-sm" dropdown-toggle> {{ 'ACTIONS' | translate }} <span class="caret"></span></button>
+                            <ul class="dropdown-menu pull-right-dropdown" role="menu">
+                                <li><a ng-show="isAdmin || item.seller.id == self.currentUserId" ui-sref="^.^.^.auction.list({productId: item.id})">
+                                    {{'PRODUCT_MANAGEMENT.PRODUCT.GO_TO_AUCTIONS'| translate}}</a></li>
+                                <li><a ui-sref="^.^.productDetail.list({productId: item.id})">{{'PRODUCT_MANAGEMENT.PRODUCT.COMMENTS_MANAGEMENT' | translate}}</a></li>
+                                <li><a ng-show="isAdmin || item.seller.id == self.currentUserId" ui-sref="^.edit({id: item.id})">{{'PRODUCT_MANAGEMENT.PRODUCT.EDIT_ACTION' | translate}}</a></li>
+                                <!--<li><a ng-show="isAdmin || item.seller.id == self.currentUserId" ng-click="confirmDeletion(item, $index)">{{'PRODUCT_MANAGEMENT.PRODUCT.DELETE_ACTION' | translate}}</a>-->
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.subject}}</td>
+                    <td>
+                        <span ng-repeat="tag in item.productTags track by $index" class="badge badge-info">{{tag.tag.name}}</span>
+                    </td>
+                    <!--<td>{{ getProductTagsLabel(item.productTags) }}</td>-->
+                    <td>{{item.seller.username}}</td>
+                    <td>
+                        <span ng-if="item.mode == 'draft'" class="badge badge-warning">{{getModeTranslatedLabel(item.mode)}}</span>
+                        <span ng-if="item.mode == 'published'" class="badge badge-success">{{getModeTranslatedLabel(item.mode)}}</span>
+                    </td>
+                    <td>
+                        <span ng-if="item.visibility == 'private'"><i class="material-icons small-icon">lock</i></span>
+                        <span ng-if="item.visibility == 'everyone'"><i class="material-icons small-icon">public</i></span>
+                        <span ng-if="item.visibility == 'customPrivate'"><i class="material-icons small-icon">people</i></span>
+                        {{getVisibilityTranslatedLabel(item.visibility)}}
+                    </td>
+                    <td>{{getBusinessSettingTranslatedLabel(item.businessSetting)}}</td>
+                    <!--<td>-->
+                    <!--<span ng-if="item.businessRule == 'no_bidding'" class="badge badge-warning">{{'PRODUCT_MANAGEMENT.PRODUCT.NOT_ALLOWED' | translate}}</span>-->
+                    <!--<span ng-if="item.businessRule == 'bidding'" class="badge badge-success">{{'PRODUCT_MANAGEMENT.PRODUCT.ALLOWED' | translate}}</span>-->
+                    <!--</td>-->
+                    <!--<td>{{item.validTime}}</td>-->
+                    <td>{{ item.createdDate | date:DEFAULT_DATETIME_FORMAT}}</td>
+                    <td>{{ item.rating | number : 1}}</td>
+                    <td ng-if="isShowFreelance()">{{ item.ages}}</td>
+                    <td ng-if="isShowFreelance()">{{ item.gender | sex}}</td>
+                    <td ng-if="isShowFreelance()">{{ item.skills | skills}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="flex-container">
+                <pagination ng-if="showPagination()"
+                            class="pagination"
+                            boundary-links="true"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            items-per-page="tableConfig.itemsPerPage"
+                            total-items="tableConfig.totalItems"
+                            ng-model="pagingOptions.currentPage"
+                            max-size="tableConfig.maxPages"
+                            ng-change="changePage(pagingOptions.currentPage)">
+                </pagination>
+
+                <div>
+                    <label class="items-per-page" for="selectItemsPerPage"> {{'ITEM_PER_PAGE' | translate}} </label>
+                    <select id="selectItemsPerPage" ng-change="onItemPerPageChange()" ng-model="tableConfig.itemsPerPage">
+                        <option ng-repeat="option in itemsPerPageList" value="{{option}}">{{option}}</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

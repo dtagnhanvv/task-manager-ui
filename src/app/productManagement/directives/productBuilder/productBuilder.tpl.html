@@ -1,0 +1,89 @@
+<section class="panel panel-default">
+
+    <div class="panel-heading">
+        <span current-page-title></span>
+        <div class="button-bar">
+            <button ui-sref="^.list" class="btn btn-sm btn-primary" type="button">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                {{'PRODUCT_MANAGEMENT.PRODUCT.BACK_TO_LIST' | translate}}
+            </button>
+        </div>
+        <div class="btn-group btnGrouped" dropdown>
+            <button type="button" class="btn " dropdown-toggle>
+                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ui-sref="^.list">{{'PRODUCT_MANAGEMENT.PRODUCT.BACK_TO_LIST' | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            
+            <form name="productForm" class="form-validation form-horizontal userForm productForm" role="form" novalidate ng-submit="submit()">
+                <!--SELLER-->
+                <div class="seller-alone" ng-if="self.isAdmin">
+                    <label for="seller">{{ 'ACCOUNT' | translate }} <span ng-if="self.isNew" class="red">*</span></label>
+                    <ui-select name="seller"
+                               ng-if="self.isNew"
+                               id="seller"
+                               ng-model="model.seller"
+                               ng-required="true"
+                               on-select="onSelectAccount($item)">
+                        <ui-select-match placeholder="{{ 'ACCOUNT_MODULE.SELECT_A_ACCOUNT' | translate }}">
+                            {{ $select.selected.username }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="account in self.accounts | filter:$select.search"
+                                           infinite-scroll="getMoreAccount()"
+                                           infinite-scroll-container="'#selectSeller'"
+                                           id="selectSeller"
+                                           infinite-scroll-distance="500"
+                                           refresh="searchAccount($select.search)"
+                                           refresh-delay="500">
+                            {{ account.username }}
+                        </ui-select-choices>
+                    </ui-select>
+                    <label ng-if="!self.isNew" class="control-label">: {{model.seller.username}}</label>
+
+                </div>
+
+
+                <!--BASIC INTO-->
+                <bd-basic-product-info basic="model.basic" is-new="self.isNew"></bd-basic-product-info>
+
+                <!--FREELANCE-->
+                <bd-freelance-info ng-if="isShowFreelance()" freelance="model.freelance" is-new="self.isNew"></bd-freelance-info>
+
+                <!--ADVANCE INFO-->
+                <bd-advance-product-info advance="model.advance" is-new="self.isNew"></bd-advance-product-info>
+
+
+                <!--buttons-->
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button ng-if="!self.isNew && self.next !== 'true'"
+                                ng-disabled="!isFormValid() || self.formProcessing"
+                                type="submit"
+                                class="btn btn-success">
+                            {{ 'SUBMIT' | translate }}
+                        </button>
+                        <button ng-if="self.isNew || self.next === 'true'"
+                                ng-disabled="!isFormValid() || self.formProcessing"
+                                type="submit"
+                                class="btn btn-success">
+                            {{ 'PRODUCT_MANAGEMENT.PRODUCT.NEXT_NEW_AUCTION_CONFIG' | translate }}
+                            <i class="fa fa-arrow-right"></i>
+                        </button>
+                        <div ng-show="!isFormValid()" class="callout callout-info">
+                            <p>{{ 'VALID_FORM' | translate }}</p>
+                        </div>
+                        <div ng-show="self.errorMessage" class="callout callout-danger">
+                            <p>{{'ACCOUNT_MODULE.SAVE_ERROR' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,149 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+
+        <div class="button-bar">
+            <button ui-sref="^.new" class="btn btn-sm btn-primary" type="button">
+                <span class="glyphicon glyphicon-plus"></span>
+                {{ 'SALE_MODULE.NEW_SALE' | translate }}
+            </button>
+        </div>
+        <div class="btn-group btnGrouped" dropdown>
+            <button type="button" class="btn " dropdown-toggle><span class="glyphicon glyphicon-align-justify"
+                                                                     aria-hidden="true"></span></button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ui-sref="^.new">{{ 'SALE_MODULE.NEW_SALE' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <form class="input-group col-sm-6 search-box">
+        <input class="form-control" ng-model="root.searchQuery"
+               ng-change="root.action.searchUser()"
+               placeholder="{{ 'SEARCH' | translate }}" type="text"/>
+        <span class="input-group-addon">{{ root.table.config.totalItems }} {{'RECORDS_FOUND' | translate}}</span>
+    </form>
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th ng-repeat="column in root.table.columns track by $index" ng-click="root.helper().sort(column)">
+                        {{root.table.titles[column]}}
+                        <span class="glyphicon glyphicon-minus"
+                              ng-if="'ACTIONS' !== column && sortData[column] !== 'desc' && sortData[column] !== 'asc'"></span>
+                        <span ng-if="'ACTIONS' !== column" class="glyphicon"
+                              ng-class="{'glyphicon-chevron-up':sortData[column] === 'asc','glyphicon-chevron-down':sortData[column] === 'desc'}"></span>
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td class="id-col">
+                        <input server-error name="id" id="id" ng-model="root.searchFields.idd"
+                               ng-change="root.action.searchBySpecificField()" type="text"
+                               class="input-sm form-control">
+                    </td>
+                    <td>
+                        <input server-error name="name" id="name" ng-change="root.action.searchBySpecificField()"
+                               ng-model="root.searchFields.name" type="text" class="input-sm form-control">
+                    </td>
+                    <td>
+                        <input server-error name="username" id="username"
+                               ng-change="root.action.searchBySpecificField()" ng-model="root.searchFields.username"
+                               type="text" class="input-sm form-control">
+                    </td>
+                    <td>
+                        <input server-error name="email" id="email" ng-change="root.action.searchBySpecificField()"
+                               ng-model="root.searchFields.email" type="text" class="input-sm form-control">
+                    </td>
+                    <td>
+                        <input server-error name="phone" id="phone" ng-change="root.action.searchBySpecificField()"
+                               ng-model="root.searchFields.phone" type="text" class="input-sm form-control">
+                    </td>
+                    <!--<td>-->
+                    <!--&lt;!&ndash;<input server-error name="userType" id="userType" ng-change="root.action.searchBySpecificField()" ng-model="root.searchFields.userType" type="text" class="input-sm form-control">&ndash;&gt;-->
+                    <!--</td>-->
+                    <td>
+                        <input server-error name="lastLogin" id="lastLogin"
+                               ng-change="root.action.searchBySpecificField()" ng-model="root.searchFields.lastLogin"
+                               type="text" class="input-sm form-control">
+                    </td>
+                    <td>
+                        <!--<input server-error name="status" id="status" ng-change="searchBySpecificField()" ng-model="searchModel.status" type="text" class="input-sm form-control">-->
+                        <isteven-multi-select id="status"
+                                              input-model="root.dataFilter.status"
+                                              max-labels="3"
+                                              output-model="root.searchFields.statusOutput"
+                                              button-label="name"
+                                              item-label="name"
+                                              tick-property="ticked"
+                                              translation="localLang"
+                                              helper-elements="''"
+                                              on-close="root.action.searchBySpecificField()">
+                        </isteven-multi-select>
+                    </td>
+                </tr>
+
+
+                <tr ng-repeat=" item in root.data.records track by $index">
+                    <td>
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn btn-sm" dropdown-toggle> {{ 'ACTIONS' | translate }} <span
+                                    class="caret"></span></button>
+                            <ul class="dropdown-menu pull-right-dropdown" role="menu">
+                                <li><a ng-click="root.action.toggleSaleStatus(item)">{{ item.enabled ? (
+                                    'SALE_MODULE.DEACTIVATE_SALE' | translate ) : (
+                                    'SALE_MODULE.ACTIVATE_SALE' | translate ) }}</a></li>
+                                <li><a ui-sref="^.edit({ id: item.id })">{{ 'SALE_MODULE.EDIT_SALE' |
+                                    translate }}</a></li>
+                                <li ng-if="allowChangeCredit()">
+                                    <a ui-sref="^.changeCredit({ id: item.id })">{{ 'SALE_MODULE.CHANGE_CREDIT' | translate }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.username }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.phone }}</td>
+                    <!--<td>-->
+                    <!--{{ item.userType }}-->
+                    <!--</td>-->
+                    <td>{{ item.lastLogin | date:DEFAULT_DATETIME_FORMAT}}</td>
+                    <td>
+                        <span class="label label-success" ng-if="item.enabled">{{ 'SALE_MODULE.ENABLED_STATUS' |translate}}</span>
+                        <span class="label label-danger" ng-if="!item.enabled">{{ 'SALE_MODULE.LOCK_STATUS' | translate}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="flex-container">
+                <pagination ng-if="root.helper().showPagination()"
+                            class="pagination"
+                            boundary-links="true"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            items-per-page="root.table.config.itemsPerPage"
+                            total-items="root.table.config.totalItems"
+                            ng-model="root.table.pagingOptions.currentPage"
+                            max-size="root.table.config.maxPages"
+                            ng-change="root.action.changePage(root.table.pagingOptions.currentPage)">
+                </pagination>
+
+                <div>
+                    <label class="items-per-page" for="selectItemsPerPage"> {{'ITEM_PER_PAGE' | translate}} </label>
+                    <select id="selectItemsPerPage" ng-change="root.action.onItemPerPageChange()"
+                            ng-model="root.table.config.itemsPerPage">
+                        <option ng-repeat="option in root.itemsPerPageList" value="{{option}}">{{option}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="modal-header bd-no-padding custom-tabset">
+    <button type="button" class="close bd-close-reactionDetail" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <tabset class="nav-tab-margin">
+        <!--TOTAL-->
+        <tab ng-click="changeReactionType(null)" class="bd-tab-heading-item">
+            <tab-heading>
+                <span class="bd-reaction-info">{{'REACTION_DETAIL.ALL' | translate}} {{self.reactionsData.total}}</span>
+            </tab-heading>
+        </tab>
+        <!--Other emotion-->
+        <tab ng-repeat="(emotion, count) in self.reactionsData.emotions" ng-click="changeReactionType(emotion)" class="bd-tab-heading-item">
+            <tab-heading>
+                <span class="glyphicon bd-social-btn bd-small-icon" ng-class="getIconByReactionType(emotion)"></span>
+                <span class="bd-reaction-info">{{count}}</span>
+            </tab-heading>
+        </tab>
+
+    </tabset>
+</div>
+
+<div class="modal-body bd-no-padding">
+    <ul class="list-group">
+        <li class="list-group-item reaction-row" ng-repeat="reaction in self.reactionDetailData.records">
+            <div class="row bd-reaction-detail-flex-container">
+                <!--avatar-->
+                <div class="bd-avatar-wrapper text-center">
+                    <img ng-if="reaction.viewer.profileImageUrl" src="{{ reaction.viewer.profileImageUrl }}" alt="" class="bd-avatar">
+                    <img ng-if="!reaction.viewer.profileImageUrl" src="http://theroyalmorecambe.co.uk/wp-content/uploads/2017/05/anonymous.gif" alt="" class="bd-avatar">
+                    <!--ICON-->
+                    <div>
+                        <span class="glyphicon bd-social-btn bd-small-icon bd-reaction-icon-under-avatar"
+                              ng-class="getIconByReactionType(reaction.emotion)">
+                        </span>
+                    </div>
+                </div>
+                <!--content-->
+                <div class="bd-reaction-detail-content">
+                    <div class="bd-comment-content-username">
+                        {{reaction.viewer.username}}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <button ng-if="self.allowNextPage" class="btn btn-link bd-extra-text"
+                ng-click="loadMoreReaction()">{{'REACTION_DETAIL.GET_MORE' | translate}}
+        </button>
+    </ul>
+
+
+
+</div>

@@ -1,0 +1,57 @@
+<form class="input-group col-sm-6 search-box">
+    <input class="form-control" ng-model="selectData.query" ng-change="searchData()" placeholder="{{ 'SEARCH' | translate }}" type="text"/>
+    <span class="input-group-addon">
+                {{ tableConfig.totalItems }} {{'RECORDS_FOUND' | translate}}
+    </span>
+</form>
+<div class="panel-body" ng-if="hasData()">
+    <div class="table-responsive">
+        <table class="table" at-action-sortable-query at-sortable-query at-table at-paginated at-list="self.bills.records" at-config="tableConfig">
+            <thead>
+            <tr>
+                <th ng-show="isAdmin()" at-attribute="account.company">{{ 'ACCOUNT' | translate }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-class="color">
+                <td at-title="#" at-implicit at-sortable at-attribute="id"></td>
+                <td at-title="{{ 'ACTIONS' | translate }}">
+                    <div class="btn-group" dropdown >
+                        <button type="button"
+                                class="btn"
+                                dropdown-toggle
+                                ng-disabled="!(isEnableConfirm(item) || isEnableReject(item) || isEnableRating(item))"
+                        >
+                            {{ 'ACTIONS' | translate }} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right-dropdown" role="menu">
+                            <!--<li ng-if="isEnableConfirm(item) || isEnableReject(item)"><a ui-sref="^.edit({id: item.id})">{{'EDIT_ACTION' | translate}}</a></li>-->
+                            <li ng-if="isEnableConfirm(item)"><a ng-click="confirm(item)">{{'BILL.DO_CONFIRM' | translate}}</a></li>
+                            <li ng-if="isEnableReject(item)"><a ng-click="reject(item)">{{'BILL.DO_REJECT' | translate}}</a></li>
+                            <li ng-if="isEnableRating(item)"><a ng-click="rate(item)">{{'BILL.DO_RATE' | translate}}</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <td at-sortable at-attribute="buyer" at-title="{{ 'BILL.BUYER' | translate }}">{{ item.buyer.username }}</td>
+                <td at-sortable at-attribute="seller" at-title="{{ 'BILL.SELLER' | translate }}">{{ item.seller.username }}</td>
+                <td at-attribute="content" at-title="{{ 'BILL.PRODUCT' | translate }}">{{ item.content }}</td>
+                <td at-implicit at-sortable at-attribute="price" at-title="{{ 'BILL.PRICE' | translate }}"></td>
+                <td at-sortable at-attribute="payment" at-title="{{ 'BILL.PAYMENT' | translate }}">
+                    <span ng-if="item.payment === AUCTION_PAYMENT_TYPE.CREDIT">{{ 'AUCTION.PAYMENT_CREDIT' | translate }}</span>
+                    <span ng-if="item.payment === AUCTION_PAYMENT_TYPE.OFFLINE">{{ 'AUCTION.PAYMENT_CASH' | translate }}</span>
+                </td>
+                <td at-sortable at-attribute="createdDate" at-title="{{ 'CREATED_DATE' | translate }}">{{ item.createdDate | date: DEFAULT_DATETIME_FORMAT}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <bd-pagination show-pagination="showPagination()"
+                       items-per-page-list="itemsPerPageList"
+                       table-config="tableConfig"
+                       paging-options="pagingOptions"
+                       on-item-per-page-change="onItemPerPageChange()"
+                       change-page="changePage(pagingOptions.currentPage)">
+        </bd-pagination>
+    </div>
+</div>

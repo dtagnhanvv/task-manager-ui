@@ -1,0 +1,47 @@
+.userRegister {
+  background-color: #6883cc;
+  background-image:url("../../../../assets/images/header.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: table;
+
+  psection {
+    display: table-cell;
+    vertical-align: middle !important;
+
+    section {
+      width: 1150px;
+      margin: 0 auto;
+    }
+
+    @media only screen and (max-width:768px) {
+      section {
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+    @media only screen and (min-width: 768px) and (max-width:1366px) {
+      section {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+    @media only screen and (min-width:1366px) {
+      section {
+        width: 70%;
+        margin: 0 auto;
+        max-width: 1150px;
+      }
+    }
+
+  }
+
+}

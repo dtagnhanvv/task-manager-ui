@@ -1,0 +1,109 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+
+        <div class="button-bar">
+            <button ng-if="showBackToList()" ng-click="backToListAccount()" class="btn btn-sm btn-primary" type="button">
+                <span class="glyphicon glyphicon-arrow-left"></span> {{'ACCOUNT_MODULE.BACK_TO_ACCOUNT_LIST' | translate }}
+            </button>
+        </div>
+        <div class="btn-group btnGrouped" dropdown ng-if="showBackToList()">
+            <button type="button" class="btn " dropdown-toggle><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ng-click="backToListAccount()"> {{'ACCOUNT_MODULE.BACK_TO_ACCOUNT_LIST' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form name="userForm" class="col-lg-6 form-validation form-horizontal userForm" role="form" ng-submit="submit()" novalidate>
+                <!--avatar-->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <div class="media user-summary">
+                            <div class="media-left">
+                                <img class="bd-avatar-sm" ng-if="account.profileImageUrl" ng-src="{{account.profileImageUrl}}">
+                                <img class="bd-avatar-sm" ng-if="!account.profileImageUrl" ng-src="{{PROFILE_DEFAULT}}">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <span>{{ 'ACCOUNT_MODULE.USERNAME' | translate }}: </span>
+                                    <strong>{{account.username}}</strong>
+                                </h4>
+                                <h4 class="media-heading">
+                                    <span>{{ 'ACCOUNT_MODULE.EMAIL' | translate }}: </span>
+                                    <strong>{{account.email}}</strong>
+                                </h4>
+                                <h4 class="media-heading">
+                                    <span>{{ 'ACCOUNT_MODULE.LAST_NAME' | translate }} {{ 'ACCOUNT_MODULE.FIRST_NAME' | translate }}: </span>
+                                    <strong>{{account.lastName}} {{account.firstName}}</strong>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--WALLETS-->
+                <div class="form-group">
+                    <label for="wallet" class="col-sm-3 control-label">
+                        {{'CREDIT.WALLETS'| translate}}
+                    </label>
+                    <div class="col-sm-9">
+                        <ui-select name="wallet"
+                                   id="wallet"
+                                   ng-model="model.wallet"
+                                   ng-required="true">
+                            <ui-select-match placeholder="{{'CREDIT.SELECT_WALLET'| translate}}">
+                                {{ $select.selected.label }}
+                            </ui-select-match>
+                            <ui-select-choices repeat="wallet in formData.wallets | filter:$select.search">
+                                {{ wallet.label }}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <!--balance-->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">{{ 'CREDIT.BALANCE' | translate }}</label>
+                    <label class="col-sm-9 bd-label-right-not-in-div">{{account.credit ? account.credit : 0}}</label>
+                </div>
+                <!--change to-->
+                <div class="form-group">
+                    <label for="changeTo" class="col-sm-3 control-label">{{ 'CREDIT.CHANGE_TO' | translate }}</label>
+                    <div class="col-sm-9">
+                        <input maxlength="14" server-error id="changeTo" name="changeTo" type="text" class="form-control"
+                               ng-model="model.amount" ng-pattern="/^\d+((\.|\,)\d+)?$/"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'CREDIT.CHANGE_TO_PLACE_HOLDER' | translate }}">
+                    </div>
+                </div>
+
+                <!--other detail-->
+                <div class="form-group">
+                    <label for="changeTo" class="col-sm-3 control-label">{{ 'CREDIT.OTHER_DETAIL' | translate }}</label>
+                    <div class="col-sm-9">
+                        <input server-error id="detail" name="detail" type="text" class="form-control"
+                               ng-model="model.detail">
+                    </div>
+                </div>
+
+                <!--button-->
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button ng-disabled="!isFormValid()" ng-disabled="formProcessing" type="submit" class="btn btn-success">{{ 'SUBMIT' | translate }}</button>
+                        <div ng-show="!isFormValid()" class="callout callout-info">
+                            <p>{{ 'VALIDATION.POSITIVE_NUM_ONLY' | translate }}</p>
+                        </div>
+                        <div ng-show="errorMessage" class="callout callout-danger">
+                            <p>{{errorMessage}}</p>
+                        </div>
+                        <div ng-show="message.saveOk" class="callout callout-success">
+                            <p>{{message.saveOk}}</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

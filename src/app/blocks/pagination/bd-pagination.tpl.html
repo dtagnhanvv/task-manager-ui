@@ -1,0 +1,19 @@
+<div class="flex-container">
+    <pagination ng-if="showPagination"
+                class="pagination"
+                boundary-links="true"
+                previous-text="&lsaquo;"
+                next-text="&rsaquo;"
+                items-per-page="tableConfig.itemsPerPage"
+                total-items="tableConfig.totalItems"
+                ng-model="pagingOptions.currentPage"
+                max-size="tableConfig.maxPages"
+                ng-change="changePage(pagingOptions.currentPage)">
+    </pagination>
+    <div>
+        <label class="items-per-page" for="selectItemsPerPage"> {{'ITEM_PER_PAGE' | translate}} </label>
+        <select id="selectItemsPerPage" ng-change="onItemPerPageChange()" ng-model="tableConfig.itemsPerPage">
+            <option ng-repeat="option in itemsPerPageList" value="{{option}}">{{option}}</option>
+        </select>
+    </div>
+</div>

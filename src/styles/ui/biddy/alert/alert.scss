@@ -1,0 +1,103 @@
+$alert_bg_no_read: #f2f7ff;
+$alert_bg_read: #ffffff;
+
+.alert-popup-container {
+  max-height: 80vh;
+  //overflow-y: auto;
+  min-width: 400px;
+  max-width: 500px;
+  overflow-x: hidden;
+  white-space: pre-wrap; /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* IE */
+
+  @extend .bd-base-hover-a;
+}
+
+.group-alert-container {
+  border: 1px solid rgba(100, 100, 100, .4);
+  border-radius: 0 0 2px 2px;
+  cursor: default;
+  @extend .normal-shadow;
+}
+
+.alert-get-more {
+  @extend .bd-extra-text !optional;
+  margin-left: 10px;
+}
+
+.alert-mark-all-read {
+  color: #0B58A2 !important;
+  margin-right: 10px;
+  @extend .bd-extra-text !optional;
+}
+
+.bd-alert-item {
+  cursor: default;
+  border-bottom: 1px solid #dddfe2;
+  .wrapper {
+    padding: 5px 10px;
+  }
+  .text-extra {
+    font-size: .9em;
+    i {
+      font-size: 14px !important;
+    }
+  }
+  :hover {
+    background-color: #eff8ff;
+  }
+}
+
+.is-read {
+  background-color: $alert_bg_read;
+}
+
+.is-no-read {
+  background-color: $alert_bg_no_read;
+}
+
+.alert-toolbar {
+  border-bottom: 1px solid #d2d2d2;
+  @extend .bd-base-hover-a;
+}
+
+.bd-base-hover-a {
+  a:hover {
+    text-decoration: underline !important;
+    background-color: transparent !important;
+  }
+}
+
+.alert-eye {
+  font-size: 10px !important;
+}
+
+.unread-count {
+  padding: 1px 5px !important;
+  font-size: 11px !important;
+}
+
+.normal-shadow {
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.alert-summary {
+  padding-top: 5px;
+  .clock{
+    width: 10px !important;
+    font-size: 10px !important;
+    margin: 0;
+  }
+  .viewDetail {
+    color: #0B58A2 !important;
+    float: right !important;
+  }
+}
+.alert-unread-icon{
+  color: #41ad49;
+  font-size: 10px !important;
+  margin:5px !important;
+  width: 10px !important;
+}

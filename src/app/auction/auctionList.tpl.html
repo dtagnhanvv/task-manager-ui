@@ -1,0 +1,68 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+        <div class="button-bar">
+            <button ui-sref="^.builder({productId: stateParams.productId})" class="btn btn-primary btn-sm" type="button"
+                    ng-disabled="self.activeAuction">
+                <span class="glyphicon glyphicon-plus"></span>{{'AUCTION.ADD'| translate}}
+            </button>
+        </div>
+        <div class="btn-group btnGrouped" dropdown>
+            <button type="button" class="btn " dropdown-toggle ng-disabled="self.activeAuction"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ui-sref="^.builder">{{'AUCTION.ADD'| translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <form class="input-group col-sm-6 search-box">
+        <input class="form-control" ng-model="selectData.query" ng-change="searchData()" placeholder="{{ 'SEARCH' | translate }}" type="text"/>
+        <span class="input-group-addon">
+                {{ tableConfig.totalItems }} {{'RECORDS_FOUND' | translate}}
+            </span>
+    </form>
+    <div class="panel-body" ng-if="hasData()">
+        <div class="table-responsive">
+            <table class="table" at-action-sortable-query at-sortable-query at-table at-paginated at-list="self.bills.records" at-config="tableConfig">
+                <thead>
+                <tr>
+                    <th ng-show="isAdmin()" at-attribute="account.company">{{ 'ACCOUNT' | translate }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td at-title="#" at-implicit at-sortable at-attribute="id"></td>
+                    <td at-title="{{ 'ACTIONS' | translate }}">
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn " dropdown-toggle> {{ 'ACTIONS' | translate }} <span class="caret"></span></button>
+                            <ul class="dropdown-menu pull-right-dropdown" role="menu">
+                                <li><a ui-sref="^.edit({productId: stateParams.productId, id: item.id})">{{'EDIT_ACTION' | translate}}</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td at-implicit at-sortable at-attribute="minimumPrice" at-title="{{ 'AUCTION.MINI_PRICE' | translate }}"></td>
+                    <td at-sortable at-attribute="status" at-title="{{ 'AUCTION.STATUS' | translate }}">
+                        <span class="badge badge-danger" ng-if="item.status === AUCTION_STATUS.CLOSED">{{'AUCTION.CLOSED_STATUS' | translate}}</span>
+                        <span class="badge badge-info" ng-if="item.status !== AUCTION_STATUS.CLOSED">{{'AUCTION.BIDDING_STATUS' | translate}}</span>
+                    </td>
+                    <td at-sortable at-attribute="showBid" at-title="{{ 'AUCTION.SHOW_BID' | translate }}">
+                        <span class="badge badge-info" ng-if="item.showBid === true">{{ 'AUCTION.ALLOW_SHOW_BIDS' | translate }}</span>
+                        <span class="badge badge-danger" ng-if="item.showBid !== true">{{ 'AUCTION.NOT_ALLOW_SHOW_BIDS' | translate }}</span>
+                    </td>
+                    <td at-sortable at-attribute="validTime" at-title="{{ 'AUCTION.VALID_TIME' | translate }}">
+                        {{ item.validTime | date: DEFAULT_DATETIME_FORMAT}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <bd-pagination show-pagination="showPagination()"
+                           items-per-page-list="itemsPerPageList"
+                           table-config="tableConfig"
+                           paging-options="pagingOptions"
+                           on-item-per-page-change="onItemPerPageChange()"
+                           change-page="changePage(pagingOptions.currentPage)">
+            </bd-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<header class="top-header clearfix">
+
+<!-- Logo -->
+<div class="logo">
+    <img src="assets/images/logo-header.png" alt="Biddy">
+</div>
+
+<!-- needs to be put after logo to make it work-->
+<div class="menu-button" toggle-off-canvas>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+</div>
+
+<div class="top-nav">
+<ul class="nav-left list-unstyled bd-top-bar">
+    <li>
+        <a href="javascript:;" toggle-nav-collapsed-min class="toggle-min"><i class="fa fa-bars"></i></a>
+    </li>
+
+    <!--Alert-->
+    <li class="dropdown text-normal nav-profile" dropdown ng-click="$event.stopPropagation()">
+        <a href="javascript:;" dropdown-toggle ng-click="onAlertClick()" ng-controller="LayoutHeader">
+            <span class="fa fa-bell"></span>
+            <span class="badge badge-danger unread-count" ng-if="formData.unreadAlert && formData.unreadAlert > 0">{{formData.unreadAlert}}</span>
+        </a>
+        <ul class="dropdown-menu with-arrow list-group group-alert-container">
+            <bd-alert-popup></bd-alert-popup>
+        </ul>
+    </li>
+
+    <li class="dropdown text-normal nav-profile" dropdown>
+        <a href="javascript:;" dropdown-toggle>
+            <span>{{ currentUser.username }}</span>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu with-arrow">
+            <li ng-controller="Logout">
+                <a ng-click="logout()">
+                    <i class="fa fa-sign-out"></i>
+                    {{ 'LOGOUT' | translate }}
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+</div>
+
+</header>

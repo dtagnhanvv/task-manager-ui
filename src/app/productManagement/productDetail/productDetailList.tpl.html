@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+        <div class="button-bar">
+            <button ng-show="self.currentUser.id === product.seller.id" ui-sref="^.^.product.edit({id: product.id})" class="btn btn-primary btn-sm" type="button">
+                <span class="glyphicon glyphicon-edit"></span> {{'PRODUCT_MANAGEMENT.PRODUCT.EDIT_ACTION'| translate}}
+            </button>
+            <button ui-sref="^.^.product.list" class="btn btn-primary btn-sm" type="button">
+                <span class="glyphicon glyphicon-arrow-left"></span> {{'COMMENT_POST.BACK_TO_LIST_POST'| translate}}
+            </button>
+        </div>
+        <!--NEW. MOBILE SCREEN-->
+        <div class="btn-group btnGrouped" dropdown>
+            <button type="button" class="btn " dropdown-toggle><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ui-sref="^.^.product.list">{{'COMMENT_POST.BACK_TO_LIST_POST'| translate}}</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="panel-body grey-background bd-no-padding">
+        <div class="bd-flex bd-flex-h-center">
+            <div class="col-md-5 col-sm-12 col-xs-12 white-back-ground bd-no-padding shadow">
+                <!--post content-->
+                <bd-post product="product" watch-manager="watchManager"></bd-post>
+                <div class="half-divider"></div>
+                <!--bids-->
+                <bd-bid-form product="product"
+                             current-user="self.currentUser"
+                             auction="auction"
+                             ng-if="auction">
+                </bd-bid-form>
+
+                <div class="half-divider" ng-if="auction"></div>
+
+                <bd-post-reaction reactions-data="reactionData"
+                                  watch-manager="watchManager"
+                                  comment-count="{{self.commentPosts.count}}">
+                </bd-post-reaction>
+
+                <div class="half-divider"></div>
+
+                <div class="panel-body">
+                    <!--&lt;!&ndash;previousPage&ndash;&gt;-->
+                    <!--<div class="row load-more-comment">-->
+                    <!--<button class="btn btn-link bd-blue" ng-if="isShowPrevious()" ng-click="previousPage()">{{'COMMENT_POST.SHOW_PREVIOUS' | translate}}</button>-->
+                    <!--</div>-->
+                    <!--comments-->
+                    <div ng-show="hasCommentModule" ng-repeat="comment in self.commentPosts.results">
+                        <bd-comment comment="comment" product="product" watch-manager="watchManager" is-show-child="false"></bd-comment>
+                    </div>
+
+                    <!--next comments-->
+                    <div class="row load-more-comment" ng-if="isShowNext()">
+                        <button class="btn btn-link bd-extra-text" ng-click="nextPage()">{{'COMMENT_POST.SHOW_MORE' | translate}}</button>
+                    </div>
+                    <div class="text-center" ng-if="formProcessing">
+                        <img src="../../../assets/images/loading.gif" height="32" width="32"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

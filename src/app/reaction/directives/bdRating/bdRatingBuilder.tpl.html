@@ -1,0 +1,13 @@
+<div class="panel-body">
+    <div class="bd-flex">
+        <div class="bd-avatar-wrapper text-center">
+            <img ng-src="{{ self.avatarUrl }}" alt="" class="bd-avatar">
+        </div>
+        <div class="awesomeRating" awesome-rating="model.rateValue" awesome-rating-options="self.ratingOptions"></div>
+    </div>
+
+    <textarea class="rating-content no-resize" ng-model="model.rateMessage" rows="5"></textarea>
+</div>
+<div class="panel-footer text-right">
+    <button ng-click="submit()" class="btn badge badge-success">{{'DONE' | translate}}</button>
+</div>

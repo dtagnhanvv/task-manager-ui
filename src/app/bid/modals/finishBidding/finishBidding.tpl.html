@@ -1,0 +1,96 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ 'BIDDING.BIDDERS' | translate }}</h3>
+</div>
+
+<div class="panel-body">
+    <!--MESSAGES-->
+    <div>
+        <div ng-show="message.saveError" class="callout callout-danger">
+            <p>{{message.saveError}}</p>
+        </div>
+        <div ng-show="message.saveOk" class="callout callout-success">
+            <p>{{message.saveOk}}</p>
+        </div>
+    </div>
+
+
+    <form class="input-group search-box">
+        <input class="form-control"
+               ng-model="selectData.query"
+               ng-change="searchData()"
+               placeholder="{{ 'SEARCH' | translate }}" type="text"/>
+        <span class="input-group-addon">
+                {{ tableConfig.totalItems }} {{'RECORDS_FOUND' | translate}}
+            </span>
+    </form>
+
+    <div class="table-responsive" ng-if="hasData()">
+        <table class="table" at-table at-paginated at-list="self.modelList.records" at-config="tableConfig">
+            <thead>
+            <th at-attribute="id" ng-click="onSort('id')">#
+                <i ng-if="!self.sortConfig.id" class="fa fa-minus"></i>
+                <i ng-if="self.sortConfig.id == 'asc'" class="fa fa-chevron-up"></i>
+                <i ng-if="self.sortConfig.id == 'desc'" class="fa fa-chevron-down"></i>
+            </th>
+            <th at-attribute="buyer" ng-click="onSort('buyer')">{{ 'BIDDING.BUYER' | translate }}
+                <i ng-if="!self.sortConfig.buyer" class="fa fa-minus"></i>
+                <i ng-if="self.sortConfig.buyer == 'asc'" class="fa fa-chevron-up"></i>
+                <i ng-if="self.sortConfig.buyer == 'desc'" class="fa fa-chevron-down"></i>
+            </th>
+            <th at-attribute="price" ng-click="onSort('price')">{{ 'BIDDING.PRICE' | translate }}
+                <i ng-if="!self.sortConfig.price" class="fa fa-minus"></i>
+                <i ng-if="self.sortConfig.price == 'asc'" class="fa fa-chevron-up"></i>
+                <i ng-if="self.sortConfig.price == 'desc'" class="fa fa-chevron-down"></i>
+            </th>
+            <th at-attribute="createdDate" ng-click="onSort('createdDate')">{{ 'BIDDING.CREATED_DATE' | translate }}
+                <i ng-if="!self.sortConfig.createdDate" class="fa fa-minus"></i>
+                <i ng-if="self.sortConfig.createdDate == 'asc'" class="fa fa-chevron-up"></i>
+                <i ng-if="self.sortConfig.createdDate == 'desc'" class="fa fa-chevron-down"></i>
+            </th>
+            </thead>
+            <tbody>
+            <tr>
+                <td at-implicit at-attribute="id"></td>
+                <td at-attribute="buyer">{{item.buyer.username}}</td>
+                <td at-implicit at-attribute="price"></td>
+                <td at-attribute="createdDate">{{item.createdDate | date: self.DEFAULT_DATETIME_FORMAT}}</td>
+                <td>
+                    <button class="btn btn-sm btn-success"
+                            ng-disabled="self.disableSelectWinner"
+                            ng-click="onChooseWinner(item)"><i class="fa fa-gavel"></i> {{'BIDDING.CHOOSE_WINNER' | translate}}
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="flex-container">
+            <pagination ng-if="showPagination()"
+                        class="pagination"
+                        boundary-links="true"
+                        previous-text="&lsaquo;"
+                        next-text="&rsaquo;"
+                        items-per-page="tableConfig.itemsPerPage"
+                        total-items="tableConfig.totalItems"
+                        ng-model="pagingOptions.currentPage"
+                        max-size="tableConfig.maxPages"
+                        ng-change="changePage(pagingOptions.currentPage)">
+            </pagination>
+            <div>
+                <label class="items-per-page" for="selectItemsPerPage"> {{'ITEM_PER_PAGE' | translate}} </label>
+                <select id="selectItemsPerPage" ng-change="onItemPerPageChange()" ng-model="tableConfig.itemsPerPage">
+                    <option ng-repeat="option in itemsPerPageList" value="{{option}}">{{option}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-dialog-footer">
+    <button class="btn btn-danger"
+            ng-disabled="self.disableSelectWinner"
+            ng-click="finishWithoutWinner()">
+        {{ 'BIDDING.FINISH_WITHOUT_WINNER' | translate }}
+    </button>
+    <button class="btn btn-dark" ng-click="closeModal()">{{ 'BIDDING.CLOSE' | translate }}</button>
+</div>

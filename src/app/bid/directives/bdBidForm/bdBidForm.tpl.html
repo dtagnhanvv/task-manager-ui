@@ -1,0 +1,84 @@
+<div class="panel panel-default no-margin no-border-radius" ng-if="!noAuction()">
+    <div class="panel-heading clearfix">
+        <h4 class="panel-title pull-left bid-panel-title">{{'BIDDING.MODULE_NAME' | translate}}</h4>
+        <div class="btn-group pull-right">
+            <a class="btn btn-sm btn-default" href="assets/pages/bidding-guide.html" target="_blank" ng-if="showGuide()">{{'BIDDING.GUIDE' | translate}}</a>
+            <a class="btn btn-success btn-sm" ng-if="showFinishBiddingBtn()" ng-click="showListBidder()">{{'BIDDING.FINISH' | translate}}</a>
+        </div>
+    </div>
+
+
+    <div class="panel-body">
+        <!--RESULT-->
+        <div class="bid-result">
+            <p class="bid-title" ng-if="finishedBidding() && self.winner.username">{{'BIDDING.END_STATUS' | translate}}</p>
+            <p ng-if="self.winner.username">{{'BIDDING.WINNER' | translate}}: <span class="winner-name">{{self.winner.username}}</span></p>
+        </div>
+
+
+        <!--BID FORM-->
+        <form name="bidForm" novalidate ng-submit="submit()" class="bid-form" ng-if="self.hasBiddingModule && !finishedBidding() && enableBidding()">
+            <div>
+                <p>{{'BIDDING.BALANCE' | translate}}: <span class="green-row">{{currentUser.credit}}</span></p>
+            </div>
+
+            <div class="bd-core-flex bd-flex-nowrap bd-flex-start-both bd-flex-row">
+                <div class="form-group bd-flex-grow-2">
+                    <input server-error name="price" id="price" type="text" class="form-control"
+                           ng-model="model.price"
+                           ng-required="true"
+                           ng-pattern="/^\d+((\.|\,)\d+)?$/"
+                           maxlength="14"
+                           placeholder="{{'BIDDING.ENTER_PRICE' | translate}}">
+
+                    <div ng-if="!isFormValid()">
+                        <span class="help-block">{{'BIDDING.NEED_LESS_THAN' | translate}} {{self.lowestPrice}}</span>
+                    </div>
+
+                    <div>
+                        <p ng-if="message.bidSuccess" class="alert-success">{{message.bidSuccess}}</p>
+                        <p ng-if="message.bidFail" class="alert-danger">{{message.bidFail}}</p>
+                        <p ng-if="!enoughCredit()" class="alert-danger">{{'BIDDING.NOT_ENOUGH_CREDIT' | translate}}</p>
+                    </div>
+
+                </div>
+                <button ng-disabled="!isFormValid() || self.formProcessing" type="submit" class="btn btn-success">
+                    <i class="fa fa-gavel"></i>
+                    {{'BIDDING.DO_BID' | translate}}
+                </button>
+            </div>
+        </form>
+
+        <div class="clearfix"></div>
+        <p class="bids-header">{{'BIDDING.BID_LIST' | translate}}</p>
+
+            <perfect-scrollbar class="scroller bids" wheel-propagation="true" wheel-speed="1" min-scrollbar-length="20">
+
+            <table class="table" ng-if="hasData()">
+                <tr>
+                    <th>{{'BIDDING.BUYER' | translate}}</th>
+                    <th>{{'BIDDING.PRICE' | translate}}</th>
+                    <th>{{'BIDDING.CREATED_DATE' | translate}}</th>
+                    <th>{{'BIDDING.STATUS' | translate}}</th>
+                </tr>
+
+                <tr ng-repeat=" bidItem in bids.records track by $index">
+                    <td>{{bidItem.buyer.username}}</td>
+                    <td>{{bidItem.price}}</td>
+                    <td>{{bidItem.createdDate | date: self.DEFAULT_DATETIME_FORMAT}}</td>
+                    <td>
+                        <span ng-if="bidItem.status === BID_STATUS.WIN" class="blue-row">{{'BIDDING.WIN_STATUS' | translate}}</span>
+                        <span ng-if="bidItem.status === BID_STATUS.CANCEL" class="red-row">{{'BIDDING.CANCEL_STATUS' | translate}}</span>
+                        <span ng-if="bidItem.status === BID_STATUS.INVALID" class="red-row">{{'BIDDING.INVALID_STATUS' | translate}}</span>
+                        <span ng-if="bidItem.status === BID_STATUS.PENDING" class="green-row">{{'BIDDING.PENDING_STATUS' | translate}}</span>
+                        <span ng-if="bidItem.status === BID_STATUS.BIDDING" class="green-row">{{'BIDDING.PENDING_STATUS' | translate}}</span>
+                        <span ng-if="bidItem.status === BID_STATUS.LOOSE" class="red-row">{{'BIDDING.LOOSE_STATUS' | translate}}</span>
+                    </td>
+                </tr>
+
+            </table>
+            <a class="load-more-bid" ng-if="showGetMoreBtn()" ng-click="onLoadMore()">{{'BIDDING.LOAD_MORE' | translate}}</a>
+            </perfect-scrollbar>
+
+    </div>
+</div>

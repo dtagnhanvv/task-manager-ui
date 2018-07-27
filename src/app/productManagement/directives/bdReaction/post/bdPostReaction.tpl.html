@@ -1,0 +1,77 @@
+<div>
+    <div id="emoji-reaction-popup" class="emoji-reaction-popup faceMocion" ng-show="showPopup" style="{{getStyle()}}"
+         ng-mouseleave="leavePopup()">
+        <div class="gusta" ng-click="clickReaction('like')"></div>
+        <div class="amo" ng-click="clickReaction('love')"></div>
+        <div class="divierte" ng-click="clickReaction('haha')"></div>
+        <div class="asombro" ng-click="clickReaction('wow')"></div>
+        <div class="triste" ng-click="clickReaction('sad')"></div>
+        <div class="molesto" ng-click="clickReaction('angry')"></div>
+    </div>
+
+    <!--LEFT-->
+    <div class="clearfix"></div>
+    <div class="bd-reaction-summary-wrapper" ng-if="reactionsData.total && reactionsData.total > 0">
+        <div ng-click="showDetail(reactionsData)">
+            <span ng-repeat="(emotion, count) in reactionsData.emotions track by $index"
+                  ng-if="hasData(reactionsData.emotions, emotion) && $index < 3"
+                  ng-class="getIconByReactionType(emotion)" class="reaction-icon">
+            </span>
+            <count>{{ reactionsData.total }}</count>
+        </div>
+
+        <!--COMMENT-->
+        <div ng-if="commentCount > 0">
+            <i class="fa fa-comment-o"></i> <span class="bd-comment-count">{{commentCount}} {{ 'COMMENT_POST.COMMENT' | translate }}</span>
+        </div>
+    </div>
+
+
+    <!--divider-->
+    <div class="half-divider"></div>
+    <!--BUTTONS ACTION-->
+    <div class="bd-flex bd-flex-space-around common-padding">
+        <button class="btn btn-link btn-xs" ng-disabled="self.isAdmin" ng-click="clickLike($event)"
+                ng-mouseenter="clickLike($event)">
+            <i class="fa fa-thumbs-o-up"></i> {{ 'REACTION_DETAIL.LIKE' | translate }}
+        </button>
+        <button class="btn btn-link btn-xs" ng-disabled="self.isAdmin" ng-click="clickReply()">
+            <i class="fa fa-comment-o"></i> {{'REACTION_DETAIL.REPLY' | translate}}
+        </button>
+        <button class="btn btn-link btn-xs" ng-click="onClickRating(reactionsData)">
+            <i class="fa fa-star-o"></i> {{'REACTION_DETAIL.RATING' | translate}} ({{ reactionsData.rating }})
+        </button>
+    </div>
+
+
+    <!--ADD COMMENT-->
+    <div class="row add-comment-editor-container" ng-show="self.isShowCommentEditor">
+        <!--avatar-->
+        <div class="bd-avatar-wrapper text-center">
+            <img ng-src="{{self.avatarUrl}}" alt="" class="bd-avatar-child">
+        </div>
+        <div class="reaction-btn-actions">
+            <div class="add-comment-editor-wrapper">
+                <!--EDITOR-->
+                <div ng-model="self.newComment.content"
+                     class="fr-vi add-comment-editor"
+                     ng-required="true"
+                     froala="froalaOptions" froala-init="initialize(initControls)">
+                </div>
+            </div>
+
+            <!--SAVE & CANCEL-->
+            <button
+                    class="btn btn-link badge badge-success"
+                    ng-click="submitComment()">
+                {{'COMMENT_POST.UPDATE_DONE' | translate}}
+            </button>
+
+            <button
+                    class="btn btn-link"
+                    ng-click="cancelAddingComment()">
+                {{'COMMENT_POST.UPDATE_CANCEL' | translate}}
+            </button>
+        </div>
+    </div>
+</div>

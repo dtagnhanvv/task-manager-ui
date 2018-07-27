@@ -1,0 +1,58 @@
+<div id="emoji-reaction-popup" class="emoji-reaction-popup faceMocion" ng-show="showPopup" style="{{getStyle()}}" ng-mouseleave="leavePopup()">
+    <div class="gusta" ng-click="clickReaction('like')"></div>
+    <div class="amo" ng-click="clickReaction('love')"></div>
+    <div class="divierte" ng-click="clickReaction('haha')"></div>
+    <div class="asombro" ng-click="clickReaction('wow')"></div>
+    <div class="triste" ng-click="clickReaction('sad')"></div>
+    <div class="molesto" ng-click="clickReaction('angry')"></div>
+</div>
+
+<div class="bd-reaction-flex-container">
+    <div class="reaction-left">
+        <div ng-click="showDetail(reactionsData)" ng-if="reactionsData.total && reactionsData.total > 0">
+            <span ng-repeat="(emotion, count) in reactionsData.emotions track by $index"
+                  ng-if="hasData(reactionsData.emotions, emotion) && $index < 3"
+                  ng-class="getIconByReactionType(emotion)">
+            </span>
+            <count>{{ reactionsData.total }}</count>
+        </div>
+
+        <span class="bd-reaction-info" ng-if="!self.isAdmin" ng-click="clickLike($event)" ng-mouseenter="clickLike($event)">{{ 'REACTION_DETAIL.LIKE' | translate }}</span>
+        <span class="bd-reaction-info" ng-if="!self.isAdmin && isChild !== true" ng-click="clickReply()">Trả lời</span>
+        <span class="bd-reaction-info">{{reactionsData['timePeriodSinceCreated']}}</span>
+    </div>
+
+    <div ng-if="commentCount > 0">
+        <i class="fa fa-comment-o"></i>
+        <span class="bd-comment-count">{{commentCount}} {{ 'COMMENT_POST.COMMENT' | translate }}</span>
+    </div>
+</div>
+
+<!--ADD COMMENT-->
+<div class="row add-comment-editor-container" ng-show="self.isShowCommentEditor">
+    <!--avatar-->
+    <div class="bd-avatar-wrapper text-center">
+        <img ng-src="{{self.avatarUrl}}" alt="" class="bd-avatar-child">
+    </div>
+    <div class="reaction-btn-actions">
+        <div class="add-comment-editor-wrapper">
+            <!--EDITOR-->
+            <div ng-model="self.newComment.content" class="fr-vi add-comment-editor" server-error ng-required="true"
+                 froala="froalaOptions" froala-init="initialize(initControls)">
+            </div>
+        </div>
+
+        <!--SAVE & CANCEL-->
+        <button
+                class="btn btn-link badge badge-success"
+                ng-click="submitComment()">
+            {{'COMMENT_POST.UPDATE_DONE' | translate}}
+        </button>
+
+        <button
+                class="btn btn-link"
+                ng-click="cancelAddingComment()">
+            {{'COMMENT_POST.UPDATE_CANCEL' | translate}}
+        </button>
+    </div>
+</div>

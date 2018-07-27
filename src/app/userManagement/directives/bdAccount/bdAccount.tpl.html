@@ -1,0 +1,183 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <span current-page-title></span>
+
+        <div class="button-bar">
+            <button ng-if="showBackToList()" ng-click="backToListAccount()" class="btn btn-sm btn-primary" type="button">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                {{ 'ACCOUNT_MODULE.BACK_TO_ACCOUNT_LIST' | translate }}
+            </button>
+        </div>
+        <div class="btn-group btnGrouped" dropdown ng-if="showBackToList()">
+            <button type="button" class="btn " dropdown-toggle><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ng-click="backToListAccount()">{{ 'ACCOUNT_MODULE.BACK_TO_ACCOUNT_LIST' | translate }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form name="userForm" class="col-lg-6 form-validation form-horizontal userForm" role="form" ng-submit="submit()" novalidate>
+                <!--avatar-->
+                <div class="form-group text-center">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <input id="browseFile" type="file" nv-file-select="" uploader="uploader" style="display: none"/>
+                        <img ng-if="account.profileImageUrl" ng-src="{{account.profileImageUrl}}" class="bd-profile-img">
+                        <img ng-if="!account.profileImageUrl" ng-src="{{PROFILE_DEFAULT}}" class="bd-profile-img">
+                        <div class="clearfix"></div>
+                        <label class="help-block" for="browseFile">{{'CHANGE_AVATAR' | translate}}</label>
+                        <span class="text-danger" ng-if="message.uploadFail">{{message.uploadFail}}</span>
+                    </div>
+                </div>
+
+                <!--username-->
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.USERNAME' | translate }} <span class="red">*</span></label>
+                    <div class="col-sm-9">
+                        <input server-error
+                               autofocus
+                               name="username"
+                               ng-disabled="!isNew"
+                               ng-model="account.username"
+                               ng-required="true"
+                               ng-minlength="2"
+                               type="text"
+                               autocomplete="off"
+                               class="form-control"
+                               id="inputUsername"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'ACCOUNT_MODULE.USERNAME_PLACE_HOLDER' | translate }}">
+
+                        <span ng-if="userForm.username.$dirty">
+                            <span ng-show="userForm.username.$error.required" class="error-message">{{'VALIDATION.REQUIRED' | translate}}</span>
+                            <span ng-show="userForm.username.$error.minlength" class="error-message">{{'VALIDATION.MIN_LENGTH' | translate}}</span>
+                        </span>
+                    </div>
+                </div>
+                <!--plainPassword-->
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.PASSWORD' | translate }} <span class="red" ng-if="isNew">*</span></label>
+                    <div class="col-sm-9">
+                        <input server-error
+                               name="plainPassword"
+                               ng-model="account.plainPassword"
+                               ng-required="isNew"
+                               ng-minlength="2"
+                               type="password"
+                               autocomplete="off"
+                               class="form-control"
+                               id="inputPassword"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'ACCOUNT_MODULE.PASSWORD_PLACE_HOLDER' | translate }}">
+
+                        <span ng-if="userForm.plainPassword.$dirty">
+                            <span ng-show="userForm.plainPassword.$error.required" class="error-message">{{'VALIDATION.REQUIRED' | translate}}</span>
+                            <span ng-show="userForm.plainPassword.$error.minlength" class="error-message">{{'VALIDATION.MIN_LENGTH' | translate}}</span>
+                        </span>
+                    </div>
+                </div>
+                <!--repeatPassword-->
+                <div class="form-group">
+                    <label for="inputRepeatPassword" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.REPEAT_PASSWORD' | translate }} <span class="red" ng-if="isNew">*</span></label>
+                    <div class="col-sm-9">
+                        <input server-error name="inputRepeatPassword" ng-model="repeatPassword" ng-required="isNew" ng-minlength="2" type="password" autocomplete="off" class="form-control"
+                               id="inputRepeatPassword"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'ACCOUNT_MODULE.PASSWORD_PLACE_HOLDER' | translate }}">
+                        <span class="help-text" ng-if="!isNew">{{ 'ACCOUNT_MODULE.HELP_BLOCK_REPEAT_PASSWORD' | translate }}</span>
+                        <p class="error-message" ng-if="isNotSamePassword()">{{ 'ACCOUNT_MODULE.PASSWORD_NOT_SAME' | translate }}</p>
+                    </div>
+                </div>
+
+                <!--email-->
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.EMAIL' | translate }} <span class="red">*</span></label>
+                    <div class="col-sm-9">
+                        <input ng-required="true" name="email"
+                               ng-model="account.email"
+                               type="email"
+                               class="form-control"
+                               id="email"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'ACCOUNT_MODULE.EMAIL_PLACE_HOLDER' | translate }}">
+                        <span ng-show="userForm.email.$error.email">
+                            <span class="error-message">{{'VALIDATION.EMAIL_FORMAT' | translate}}</span>
+                            <p class="help-text">{{'VALIDATION.EMAIL_EXAMPLE' | translate}}</p>
+                        </span>
+                    </div>
+                </div>
+                <!--lastName-->
+                <div class="form-group">
+                    <label for="inputLastName" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.LAST_NAME' | translate }}</label>
+                    <div class="col-sm-9">
+                        <input server-error name="lastName" ng-model="account.lastName" type="text" class="form-control" id="inputLastName"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'ACCOUNT_MODULE.LAST_NAME_PLACE_HOLDER' | translate }}">
+                    </div>
+                </div>
+                <!--firstName-->
+                <div class="form-group">
+                    <label for="inputFirstName" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.FIRST_NAME' | translate }}</label>
+                    <div class="col-sm-9">
+                        <input server-error name="firstName" ng-model="account.firstName" type="text" class="form-control" id="inputFirstName"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'ACCOUNT_MODULE.FIRST_NAME_PLACE_HOLDER' | translate }}">
+                    </div>
+                </div>
+                <!--phone-->
+                <div class="form-group">
+                    <label for="phone" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.PHONE' | translate }} <span class="red">*</span> </label>
+                    <div class="col-sm-9">
+                        <input name="phone"
+                               ng-required="true"
+                               ng-model="account.phone"
+                               type="text"
+                               class="form-control"
+                               id="phone"
+                               ng-pattern="/^[0-9]*$/"
+                               placeholder="{{'EXAMPLE' | translate}} {{ 'ACCOUNT_MODULE.PHONE_PLACE_HOLDER' | translate }}">
+
+                        <span ng-show="userForm.phone.$error.pattern" class="error-message">
+                                {{'VALIDATION.NUMBER_ONLY' | translate}}
+                        </span>
+                    </div>
+                </div>
+
+                <!--modules-->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.MODULES' | translate }}</label>
+                    <div class="col-sm-9">
+                        <div ng-repeat="module in modules">
+                            <label class="ui-checkbox"><input name="enabledModules[]" type="checkbox" ng-click="toggleModuleRole(module.role)" ng-disabled="disabledModule(module.role)"
+                                                              ng-checked="hasModuleEnabled(module.role)">
+                                <span>{{ module.label }}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--status-->
+                <div class="form-group">
+                    <label for="inputEnabled" class="col-sm-3 control-label">{{ 'ACCOUNT_MODULE.ENABLED' | translate }}</label>
+                    <div class="col-sm-9">
+                        <label class="ui-checkbox"><input server-error ng-disabled="isDisableActive()" name="active" type="checkbox" ng-model="account.enabled" id="inputEnabled"><span></span></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button ng-disabled="userForm.$dirty && !isFormValid()" ng-disabled="formProcessing" type="submit" class="btn btn-success">{{ 'SUBMIT' | translate }}</button>
+                        <div ng-show="userForm.$dirty && !isFormValid()" class="callout callout-danger">
+                            <p>{{ 'VALIDATION.INVALID_FORM' | translate }}</p>
+                        </div>
+
+                        <!--SHOW ALL FORM ERROR-->
+                        <!--<ul>-->
+                        <!--<li ng-repeat="(key, errors) in userForm.$error track by $index"><strong>{{ key }}</strong> errors-->
+                        <!--<ul>-->
+                        <!--<li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>-->
+                        <!--</ul>-->
+                        <!--</li>-->
+                        <!--</ul>-->
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

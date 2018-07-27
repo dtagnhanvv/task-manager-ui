@@ -1,1 +1,1 @@
-# task-manager-ui
+# biddy-admin-ui

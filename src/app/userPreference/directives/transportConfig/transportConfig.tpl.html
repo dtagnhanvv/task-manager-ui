@@ -1,0 +1,49 @@
+<accordion close-others="true">
+    <accordion-group class="notUpperCase" ng-init="findServiceTabStatus = true" is-open="findServiceTabStatus">
+        <accordion-heading>
+            <div>
+                {{'USER_PREFERENCE.TRANSPORT_CONFIG_TITLE' | translate}}
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': findServiceTabStatus, 'glyphicon-chevron-right': !findServiceTabStatus}"></i>
+            </div>
+        </accordion-heading>
+
+        <span class="help-block">{{'USER_PREFERENCE.HELP_TEXT' | translate}}</span>
+        <div class="clearfix"></div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="transport-img form-inline">
+                    <!--AVATAR-->
+                    <div class="form-group">
+                        <bd-image-uploader options="driverUploaderConfig" output-data="transportConfigData.avatar"></bd-image-uploader>
+                        <label class="control-label">{{ 'USER_PREFERENCE.AVATAR' | translate }}</label>
+                    </div>
+
+                    <!--VEHICLE_PHOTO-->
+                    <div class="form-group">
+                        <bd-image-uploader options="vehicleUploaderConfig" output-data="transportConfigData.vehiclePhoto"></bd-image-uploader>
+                        <label class="control-label">{{ 'USER_PREFERENCE.VEHICLE_PHOTO' | translate }}</label>
+                    </div>
+
+                    <div class="clearfix">
+                    </div>
+                    <!--VEHICLE_ID-->
+                    <div class="form-group">
+                        <label for="vehicleId">{{ 'USER_PREFERENCE.VEHICLE_ID' | translate }}</label>
+                        <div class="clearfix"></div>
+                        <input name="avatar" id="vehicleId" type="text" class="form-control" ng-model="transportConfigData.vehicleId">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vehicles">
+                    <span ng-repeat="service in transportConfigData.vehicles track by $index" class=" col-sm-6">
+                        <label class="ui-checkbox" ng-click="updateVehicles(service)">
+                            <input type="checkbox" ng-model="service.checked" ng-checked="service.checked"><span>{{service.label}}</span>
+                        </label>
+                    </span>
+        </div>
+    </accordion-group>
+</accordion>

@@ -1,0 +1,235 @@
+@import "avartar",
+"panel";
+
+$bd-blue-extra: #0b58a2;
+
+.bd-markdown-container {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.no-resize {
+  resize: none;
+}
+
+.bd-extra-text {
+  color: #0b58a2 !important;
+  font-size: 12px !important;
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+.bd-extra-text-bold {
+  font-size: 14px;
+}
+
+.bd-header-item {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.shadow {
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.border {
+  border: 1px solid $border_color !important;
+}
+
+.border-top {
+  border-top: 1px solid $border_color !important;
+}
+
+.border-right {
+  border-right: 1px solid $border_color !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $border_color !important;
+}
+
+.border-left {
+  border-left: 1px solid $border_color !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.common-padding {
+  padding: 8px 10px 8px 10px;
+}
+
+.half-divider {
+  @extend .border-bottom;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.bd-btn-no-padding {
+  padding: 0;
+}
+
+.bd-right {
+  float: right;
+}
+
+.bd-left {
+  float: left;
+  padding-left: 0;
+}
+
+.grey-background {
+  background-color: #eff1f3;
+}
+
+.white-back-ground {
+  background-color: #ffffff;
+}
+
+.red {
+  color: red;
+}
+
+.bd-flex-nowrap {
+  -webkit-flex-flow: row nowrap !important;
+}
+
+.bd-flex-wrap {
+  -webkit-flex-flow: row wrap !important;
+}
+
+.bd-core-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.bd-flex-start-both {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.bd-flex-row {
+  flex-direction: row !important;
+}
+
+.bd-flex-grow-2 {
+  flex-grow: 2 !important;
+}
+
+.bd-flex {
+  @extend .bd-core-flex;
+  @extend .bd-flex-nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flex-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; /* or inline-flex . Put this line bellow */
+
+  -webkit-flex-flow: row wrap;
+  flex-direction: row;
+  /*flex-direction: row | row-reverse | column | column-reverse;*/
+  flex-wrap: wrap;
+  /*flex-wrap: nowrap | wrap | wrap-reverse;*/
+  justify-content: flex-start;
+  /*justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;*/
+  align-items: center;
+  /*align-items: flex-start | flex-end | center | baseline | stretch;*/
+  align-content: center;
+  //align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+}
+
+.bd-flex-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 7px;
+}
+
+.bd-flex-between {
+  justify-content: space-between;
+}
+
+.bd-flex-space-around {
+  justify-content: space-around;
+}
+
+.bd-flex-horizontal-start {
+  justify-content: flex-start;
+}
+
+.bd-flex-vertical-start {
+  align-items: flex-start;
+}
+
+.bd-flex-h-center {
+  justify-content: center !important;
+}
+
+.bd-flex-v-center {
+  align-items: center !important;
+}
+
+.bd-inline-block {
+  display: inline-block !important;
+}
+
+.bd-label-right-not-in-div {
+  padding-top: 7px;
+}
+
+.help-text {
+  padding: 5px;
+  font-size: 0.9em;
+  @extend .help-block;
+}
+
+.error-message {
+  @extend .red;
+  @extend .help-text;
+}
+
+.icon-spin {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.scroller {
+  position: relative; /* relative or absolute positioning required by Perfect Scrollbar */
+  max-height: 500px; /* height must be limited to induce scrolling behavior */
+}
+
+.no-border {
+  border: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="modal-title">{{'BILL.RATE_TITLE' | translate}}</h3>
+</div>
+
+<div class="modal-body bd-no-padding">
+    <p class="help-block" style="padding: 10px 20px 0 20px">{{'BILL.RATE_HELP_TEXT' | translate}}</p>
+
+    <bd-rating-builder product-id="{{self.postId}}"
+                       bill-id="{{self.billId}}"
+                       rate-model="self.rateModel"
+                       watch-manager="watchManager"
+                       ng-if="self.currentTab === 'new' && !self.isAdmin && !self.isSale">
+    </bd-rating-builder>
+</div>

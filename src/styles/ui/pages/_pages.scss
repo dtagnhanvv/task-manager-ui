@@ -1,0 +1,15 @@
+.non-display {
+    display: none;
+}
+
+.page {
+    padding: 15px;
+    // need this whitespace to ensure bootstrap dropdowns don't get cutoff
+    margin-bottom: 300px;
+}
+
+.page-form-ele {
+    h3 {
+        margin: 0;
+    }
+}
