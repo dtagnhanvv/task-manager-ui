@@ -466,6 +466,23 @@
                 "URL": "Url",
                 "TYPE": "Loại"
             },
+            "TASK": {
+                "MODULE_NAME": "Quản lý công việc",
+                "TASK_MANAGEMENT": "Quản lý công việc",
+                "NEW": "Thêm công việc",
+                "ADD": "Thêm công việc",
+                "EDIT": "Chỉnh sửa công việc",
+                "LIST": "Danh sách công việc",
+                "SAVE_SUCCESS": "Lưu công việc thành công",
+                "SAVE_FAIL": "Lưu công việc không thành công",
+                "ADD_SUCCESS": "Thêm công việc thành công",
+                "ADD_FAIL": "Thêm công việc không thành công",
+                "DELETE_SUCCESS": "Xóa công việc thành công",
+                "BACK_TO_LIST": "Quay lại danh sách công việc",
+                "NAME": "Tên",
+                "URL": "Url",
+                "TYPE": "Loại"
+            },
             "RATING": {
                 "LIST": "Danh sách các đánh giá",
                 "NEW": "Thêm đánh giá",

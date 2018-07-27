@@ -206,6 +206,30 @@
             </ul>
         </li>
 
+        <!--TASK-->
+        <li>
+            <a href="#" class="menu-dropdown">
+                <span class="menu-icon">
+                    <i class="fa fa-tags"></i>
+                </span>
+                <span class="menu-text">{{ 'NAVBAR.TASK_MANAGEMENT' | translate }}</span>
+                <!--<i class="menu-expand"></i>-->
+            </a>
+
+            <ul class="submenu">
+                <li ui-sref-active="active">
+                    <a ui-sref=".task.list">
+                        <span class="menu-text">{{ 'NAVBAR.TASKS' | translate }}</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".task.builder">
+                        <span class="menu-text">{{ 'NAVBAR.NEW_TASK' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!--PROFILE-->
         <li>
             <a href="#" class="menu-dropdown">

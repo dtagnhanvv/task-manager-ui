@@ -12,5 +12,6 @@ app = angular.module('biddy', [
     'biddy.bill',
     'biddy.auction',
     'biddy.alert',
-    'biddy.userPreference'
+    'biddy.userPreference',
+    'biddy.task'
 ]);
