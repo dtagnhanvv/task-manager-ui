@@ -30,21 +30,21 @@
                     </div>
                 </div>
 
-                <!--TASK_URL-->
+                <!--RELEASE_PLAN-->
                 <div class="form-group">
-                    <label for="taskName" class="col-sm-3 control-label">
-                        {{'TASK.TASK_URL'| translate}} <span class="red">*</span>
+                    <label for="releasePlan" class="col-sm-3 control-label">
+                        {{'TASK.RELEASE_PLAN'| translate}} <span class="red">*</span>
                     </label>
                     <div class="col-sm-9">
-                        <input server-error name="taskName" id="taskUrl" type="text" class="form-control"
-                               ng-model="model.taskUrl" ng-required="true">
+                        <input server-error name="releasePlan" id="releasePlan" type="text" class="form-control"
+                               ng-model="model.releasePlan" ng-required="true">
                     </div>
                 </div>
 
                 <!--BOARD-->
                 <div class="form-group">
                     <label for="board" class="col-sm-3 control-label">
-                        {{'TASK.NAME'| translate}} <span class="red">*</span>
+                        {{'TASK.BOARD'| translate}} <span class="red">*</span>
                     </label>
                     <div class="col-sm-9">
                         <input server-error name="board" id="board" type="text" class="form-control"
@@ -63,6 +63,17 @@
                     </div>
                 </div>
 
+                <!--TASK_URL-->
+                <div class="form-group">
+                    <label for="taskUrl" class="col-sm-3 control-label">
+                        {{'TASK.TASK_URL'| translate}} <span class="red">*</span>
+                    </label>
+                    <div class="col-sm-9">
+                        <input server-error name="taskName" id="taskUrl" type="text" class="form-control"
+                               ng-model="model.taskUrl" ng-required="true">
+                    </div>
+                </div>
+
                 <!--STATUS-->
                 <div class="form-group">
                     <label for="status" class="col-sm-3 control-label">
@@ -71,17 +82,6 @@
                     <div class="col-sm-9">
                         <input server-error name="status" id="status" type="text" class="form-control"
                                ng-model="model.status" ng-required="true">
-                    </div>
-                </div>
-
-                <!--RELEASE_PLAN-->
-                <div class="form-group">
-                    <label for="releasePlan" class="col-sm-3 control-label">
-                        {{'TASK.RELEASE_PLAN'| translate}} <span class="red">*</span>
-                    </label>
-                    <div class="col-sm-9">
-                        <input server-error name="releasePlan" id="releasePlan" type="text" class="form-control"
-                               ng-model="model.releasePlan" ng-required="true">
                     </div>
                 </div>
 

@@ -9,7 +9,7 @@
         $scope.keyword = '';
         $scope.formData = {};
         $scope.model = task || {
-            project: null,
+            project: "Biddy",
             taskUrl: null,
             board: null,
             cardNumber: null,

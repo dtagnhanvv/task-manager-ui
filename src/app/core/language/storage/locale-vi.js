@@ -491,6 +491,7 @@
                 "TASK_URL": "URL",
                 "REVIEW": "Nhận xét",
                 "TYPE": "Loại",
+                "BOARD": "Bảng"
             },
             "RATING": {
                 "LIST": "Danh sách các đánh giá",
